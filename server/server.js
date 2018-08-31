@@ -21,3 +21,6 @@ server.installSubscriptionHandlers(httpServer);
 httpServer.listen({port: 8000},() => {
 	console.log('server started on http://localhost:8000/graphql');
 });
+
+//TODO ADD friends List
+// ADD Auto update climate from open weather 

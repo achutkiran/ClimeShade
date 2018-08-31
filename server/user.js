@@ -104,6 +104,7 @@ exports.removeUserDb =async function removeUserDb(userId,token){
     if(out.userId != userId){
         return "you don't have permision"
     }
+    await deleteUserWeather(userId);
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)
         .input('userId',sql.Int,userId)
@@ -197,6 +198,13 @@ async function updateUserWeather(args,out){
                 weatherCondition = CASE WHEN @weatherCondition is null THEN weatherCondition ELSE @weatherCondition END
                 WHERE userId = @userId AND zipcode = @zipcode
         `)
+}
+
+async function deleteUserWeather(userId){
+    let pool = await new sql.ConnectionPool(config).connect();
+    let result = await new sql.Request(pool)
+        .input("userId",sql.Int,userId)
+        .query("DELETE userClimate WHERE userId = @userId");
 }
 
 async function hashPassword(pass){
