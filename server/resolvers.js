@@ -24,7 +24,7 @@ const resolvers = {
             let out = await userDb.updateUserDb(args,context.token);
             return out;
         },
-        async removeUser(parent,args){
+        async removeUser(parent,args,context){
             let out = await userDb.removeUserDb(args.userId,context.token);
             return out;
         },

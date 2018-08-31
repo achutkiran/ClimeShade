@@ -101,8 +101,7 @@ exports.removeUserDb =async function removeUserDb(userId,token){
     if(!out){
         return "Please login again";
     }
-    console.log(out);
-    if(out.userId != args.userId){
+    if(out.userId != userId){
         return "you don't have permision"
     }
     let pool = await new sql.ConnectionPool(config).connect()
