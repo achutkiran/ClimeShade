@@ -36,6 +36,11 @@ const resolvers = {
         async updateWeather(parent,args){
             let out = await climateDb.updateWeather(args.zipcode);
             return "weather information updated";
+        },
+
+        async updateUserWeather(parents,args,context){
+            let out = await userDb.setUserWeather(args,context.token);
+            return out;
         }
     },
     

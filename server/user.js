@@ -14,7 +14,7 @@ exports.loginUser = async function loginUser(args){
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)
         .input('userName',sql.VarChar(9),args.userName)
-        .query(`SELECT firstName, lastName, password, userId FROM userdetails WHERE
+        .query(`SELECT firstName, lastName, password, userId, zipcode FROM userdetails WHERE
                 userName = @userName`)
     if (result.recordset.length == 0){
         return "User is not registered"
@@ -152,6 +152,53 @@ exports.updateUserDb = async function updateUserDb(args,token){
     return "user data updated"
 }
 
+exports.setUserWeather = async  function setUserWeather(args,token){
+    let out = await checkToken(token);
+    if(!out){
+        return "Please login";
+    }
+    if(args.zipcode == null){
+        args.zipcode = out.zipcode;
+    }
+    if(await checkUserWeather(out.userId,args.zipcode)){
+        await updateUserWeather(args,out);
+        return "Weather information updated"
+    }
+    let pool = await new sql.ConnectionPool(config).connect()
+    let result = await new sql.Request(pool)
+        .input('userId',sql.Int,out.userId)
+        .input('zipcode',sql.Int,args.zipcode)
+        .input('temperature',sql.VarChar(10),args.temperature)
+        .input('weatherCondition',sql.VarChar(10),args.weatherCondition)
+        .query(`INSERT INTO userClimate (
+                    userId,
+                    zipcode,
+                    temperature,
+                    weatherCondition
+                )
+                VALUES (
+                    @userId,
+                    @zipcode,
+                    @temperature,
+                    @weatherCondition)`)
+    return "Weather information uploaded";
+
+}
+
+async function updateUserWeather(args,out){
+    let pool = await new sql.ConnectionPool(config).connect();
+    let result = await new sql.Request(pool)
+        .input('userId',sql.Int,out.userId)
+        .input('zipcode',sql.Int,args.zipcode)
+        .input('temperature',sql.VarChar(10),args.temperature)
+        .input('weatherCondition',sql.VarChar(10),args.weatherCondition)
+        .query(`UPDATE userClimate SET
+                temperature = CASE WHEN @temperature is null THEN temperature ELSE @temperature END,
+                weatherCondition = CASE WHEN @weatherCondition is null THEN weatherCondition ELSE @weatherCondition END
+                WHERE userId = @userId AND zipcode = @zipcode
+        `)
+}
+
 async function hashPassword(pass){
     return await bcrypt.hash(pass,10);
 }
@@ -185,4 +232,22 @@ async function checkUserDetails(args,out){
         return false;
     }
     return true;
+}
+
+async function checkUserWeather(userId,zipcode){
+    let pool = await new sql.ConnectionPool(config).connect();
+    let result = await new sql.Request(pool)
+        .input('userId',sql.Int,userId)
+        .input('zipcode',sql.Int,zipcode)
+        .query(`SELECT *
+                FROM userClimate WHERE
+                userId = @userId AND
+                zipcode = @zipcode
+        `)
+    if(result.recordset.length!=0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

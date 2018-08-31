@@ -31,6 +31,11 @@ const {gql} = require('apollo-server-express');
 		"login to user account"
 		login(userName:String!,
 			  password:String!):String
+
+		"update weather information by user"
+		updateUserWeather(zipcode:Int,
+							temperature: String,
+							weatherCondition: String):String
 			
 		"Update weather information in database"
 		updateWeather(zipcode:Int!): String
