@@ -1,0 +1,23 @@
+{
+  "name": "climeShade",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.0.5",
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.0",
+    "dotenv": "^6.0.0",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "jsonwebtoken": "^8.3.0",
+    "msnodesqlv8": "^0.6.8",
+    "mssql": "^4.1.0"
+  }
+}
