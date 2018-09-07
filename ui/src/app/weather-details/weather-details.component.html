@@ -1,0 +1,62 @@
+<ng-container
+  *ngIf="loading; then notLoaded; else loaded">
+</ng-container>
+<ng-template #notLoaded>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>
+<ng-template #loaded>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Current weather</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <!-- <i class="material-icons">cloud</i> -->
+      <div [ngSwitch]="icon">
+          <img *ngSwitchCase="'01d'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'01n'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'02d'" src="../../assets/few_clouds.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'02n'" src="../../assets/few_clouds.svg"matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'03d'" src="../../assets/scattered_clouds.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'03n'" src="../../assets/scattered_clouds.svg"matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'04d'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'04n'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'09d'" src="../../assets/shower_rain.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'10d'" src="../../assets/rain.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'11d'" src="../../assets/Thunderstrom.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'13d'" src="../../assets/snow.svg" matTooltip={{weatherCondition}}>
+          <img *ngSwitchCase="'50d'" src="../../assets/mist.svg" matTooltip={{weatherCondition}}>
+      </div>
+      <b>{{temperature}}</b>
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="zipcode">
+          <th mat-header-cell *matHeaderCellDef>Zipcode</th>
+          <td mat-cell *matCellDef='let element'>{{element.zipcode}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef class="dummy">City</th>
+          <td mat-cell *matCellDef='let element'>{{element.city}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="pressure">
+          <th mat-header-cell *matHeaderCellDef>Pressure</th>
+          <td mat-cell *matCellDef='let element'>{{element.pressure}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="humidity">
+            <th mat-header-cell *matHeaderCellDef>Humidity</th>
+            <td mat-cell *matCellDef='let element'>{{element.humidity}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="windSpeed">
+          <th mat-header-cell *matHeaderCellDef>Windspeed</th>
+          <td mat-cell *matCellDef='let element'>{{element.windSpeed}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

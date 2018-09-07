@@ -11,6 +11,7 @@ const config = {
 //geting temperature readings from database
 
 exports.getTempDb = async function getTempDb(zip){
+    await exports.updateWeather(zip);
 	let pool =  await new sql.ConnectionPool(config).connect()
 	let result =  await new sql.Request(pool)
 	    .query(`
@@ -39,7 +40,8 @@ exports.setTempDb = async function setTempDb(zip){
         .input('humidity',sql.VarChar(5),data.humidity)
         .input('windSpeed',sql.VarChar(10),data.windSpeed)
         .input('city',sql.VarChar(50),data.city)
-        .input('weatherCondition',sql.VarChar(10),data.weatherCondition)
+        .input('weatherCondition',sql.VarChar(30),data.weatherCondition)
+        .input('icon',sql.VarChar(3),data.icon)
         .query(`
             INSERT INTO climate (
                 zipcode,
@@ -48,7 +50,8 @@ exports.setTempDb = async function setTempDb(zip){
                 humidity,
                 windSpeed,
                 city,
-                weatherCondition
+                weatherCondition,
+                icon
             ) VALUES (
                 @zipcode,
                 @temperature,
@@ -56,7 +59,8 @@ exports.setTempDb = async function setTempDb(zip){
                 @humidity,
                 @windspeed,
                 @city,
-                @weatherCondition
+                @weatherCondition,
+                @icon
             )
         `)
 
@@ -75,7 +79,8 @@ exports.updateWeather = async function updateWeather(zip){
             .input('humidity',sql.VarChar(5),data.humidity)
             .input('windSpeed',sql.VarChar(10),data.windSpeed)
             .input('city',sql.VarChar(50),data.city)
-            .input('weatherCondition',sql.VarChar(10),data.weatherCondition)
+            .input('weatherCondition',sql.VarChar(30),data.weatherCondition)
+            .input('icon',sql.VarChar(3),data.icon)
             .query(`
                 UPDATE climate SET 
                     temperature = @temperature,
@@ -83,7 +88,8 @@ exports.updateWeather = async function updateWeather(zip){
                     humidity = @humidity,
                     windSpeed = @windspeed,
                     city = @city,
-                    weatherCondition = @weatherCondition 
+                    weatherCondition = @weatherCondition,
+                    icon = @icon 
                     WHERE zipcode = @zipcode
             `)
     }

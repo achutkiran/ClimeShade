@@ -54,6 +54,7 @@ const {gql} = require('apollo-server-express');
 		windSpeed: String
 		city: String
 		weatherCondition: String
+		icon: String
 	}
 
 	"user details"
