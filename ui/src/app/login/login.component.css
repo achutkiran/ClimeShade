@@ -2,27 +2,42 @@
 
 .card {
     width: 397px;
-    height: 325px;
+    height: 250px;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%)
 }
 
 .title {
     font-family: 'Fredericka the Great', cursive;
     font-size: 48px;
     position: absolute;
-    left: 50%;
     top: 50px;
-    transform: translate(-50%,-50%)
 }
 
 .user-form{
     position:absolute;
+    top: 100px;
+    width: 100%;
 }
 
-.fullwidth {
-    width: 100%
+.ninety-width, .login {
+    width: 90%
 }
 
+.centre{
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.login {
+    position: absolute;
+    bottom: 0%;
+}
+
+.register {
+    position: absolute;
+    bottom: -10%;
+    text-decoration: none;
+    color: blue;
+    right: 0%;
+}
