@@ -17,7 +17,7 @@ exports.loginUser = async function loginUser(args){
         .query(`SELECT firstName, lastName, password, userId, zipcode FROM userdetails WHERE
                 userName = @userName`)
     if (result.recordset.length == 0){
-        return "User is not registered"
+        return new Error('user not registered');
     }
     else{
         let out = await validatePassword(args.password,result.recordset[0].password)
@@ -26,7 +26,7 @@ exports.loginUser = async function loginUser(args){
             return token;
         }
         else{
-            return "wrong Password try again"
+           throw new Error('Wrong Password');
         }
     }
 }

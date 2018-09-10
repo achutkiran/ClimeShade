@@ -3,18 +3,20 @@
     <mat-card-title class="title centre">ClimeShade</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="user-form">
+    <form class="user-form" >
       <mat-form-field class="ninety-width">
-        <input matInput placeholder="UserName">
+        <input #name matInput placeholder="UserName" [formControl]="requiredFormControl">
+        <mat-error *ngIf="requiredFormControl.hasError('required')">UserName is required</mat-error>
       </mat-form-field>
       <br>
       <mat-form-field class="ninety-width">
-        <input matInput type="password" placeholder="Password">
+        <input #password matInput type="password" placeholder="Password" [formControl]="requiredFormControl">
+        <mat-error *ngIf="requiredFormControl.hasError('required')">Password is required</mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button class="login centre ninety-width" color="primary">Login</button>
+    <button mat-raised-button class="login centre ninety-width" color="primary" (click)="login(name.value,password.value)">Login</button>
     <a class="register" href="">Register new user</a>
   </mat-card-actions>
 </mat-card>

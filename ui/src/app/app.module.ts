@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import {GraphQLModule} from './apollo.config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 //Angular material imports
 
@@ -27,6 +30,7 @@ import { IndexComponent } from './index/index.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { WeatherDetailsComponent } from './weather-details/weather-details.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { LoginComponent } from './login/login.component';
     ToolbarComponent,
     IndexComponent,
     WeatherDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,9 @@ import { LoginComponent } from './login/login.component';
     MatTableModule,
     MatProgressBarModule,
     MatTooltipModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
