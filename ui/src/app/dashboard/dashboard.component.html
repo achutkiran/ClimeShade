@@ -1,0 +1,11 @@
+<ng-container
+  *ngIf="loading; then notLoaded; else loaded">
+</ng-container>
+<ng-template #notLoaded>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>
+<ng-template #loaded>
+    <app-weather-details [zipcode]=zip></app-weather-details>
+    <app-weather-graph></app-weather-graph>
+</ng-template>
+

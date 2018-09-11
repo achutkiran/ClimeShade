@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
+.title{
+    font-family: 'Fredericka the Great', cursive;
+    color:white;
+    background-color:#3E54B1;
+    padding: 22px 50px 22px 10px;
+    elevation: 60deg;
+}
+
+.toolbar{
+    background-color:white;
+}
+.account{
+    font-size: 90px;
+}
+.sidenav{
+    height:100%;
+    position: inherit;
+}
+p{
+    padding-left: 15px;
+}
+a{
+    text-decoration: none;
+}
+a:visited{
+    color:black;
+}

@@ -7,7 +7,9 @@ const {gql} = require('apollo-server-express');
 		" gives user details"
 		user(id: ID
 			 firstName: String
-			 lastName:String): [User] 
+			 lastName:String): User 
+
+		forecast(zipcode: Int!):[ForecastWeather]
 	}
 
 	type Mutation{
@@ -30,7 +32,7 @@ const {gql} = require('apollo-server-express');
 	
 		"login to user account"
 		login(userName:String!,
-			  password:String!):String
+			  password:String!):[String]
 
 		"update weather information by user"
 		updateUserWeather(zipcode:Int,
@@ -63,6 +65,15 @@ const {gql} = require('apollo-server-express');
 		lastName: String
 		userId: ID!
 		climate: Climate
+	}
+
+	type ForecastWeather{
+		name:String
+		series: [Series]
+	}
+	type Series{
+		name:String
+		value: Int
 	}
  `;
  module.exports = schema;

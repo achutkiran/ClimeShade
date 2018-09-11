@@ -1,0 +1,20 @@
+<app-toolbar [title]= title></app-toolbar>
+<div class="text"><b>Search</b></div>
+<mat-card class="searchcard">
+  <mat-card-content >
+    <button mat-icon-button (click)="updateWeather()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field>
+      <input matInput placeholder="zipcode" [(ngModel)]="zip">
+      <button mat-button *ngIf="zip" matSuffix mat-icon-button aria-label ="Clear" (click)="zip=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+<div class="text"><b>Result</b></div>
+<div class="detailsCard">
+    <app-weather-details [zipcode]=zip></app-weather-details>
+</div>
+

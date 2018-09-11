@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./weather-details.component.css']
 })
 export class WeatherDetailsComponent implements OnInit {
+  @Input()
   zipcode:number;
   loading:boolean = true;
   weatherCondition:string;
@@ -20,8 +21,12 @@ export class WeatherDetailsComponent implements OnInit {
   constructor(private apollo: Apollo,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.zipcode = +this.route.snapshot.paramMap.get('zip');
-    // this.zipcode = 75080;
+    // if(this.zipcode== null){
+    //   this.route.params.subscribe((params: Params) => {
+    //     this.zipcode = params['zip'];
+    //   })
+    // }
+    console.log(this.zipcode);
     this.getWeatherData();
   }
 

@@ -1,0 +1,48 @@
+.center{
+    position:relative;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.mat-card{
+    width:376px;
+}
+.top{
+    /* top: 2%; */
+    left: 37%;
+    position: relative;
+    margin:15px;
+}
+
+.generalCard{
+    top: 19%
+}
+
+.locHeader{
+    position: relative;
+    top: 30%;
+    left:37%;
+}
+
+.locCard{
+    top: 43%;
+}
+
+.accHeader {
+    position: relative;
+    left: 37%;
+    top: 50%;
+}
+
+.accCard {
+    top:70%;
+}
+
+.registerButton {
+    position: relative;
+    bottom: 10%;
+    left: 58%;
+}
+
+.full-width {
+    width:100%;
+}

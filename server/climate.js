@@ -31,7 +31,7 @@ exports.getTempDb = async function getTempDb(zip){
 //pushing temperature values into database from openweather API
 
 exports.setTempDb = async function setTempDb(zip){
-    let data = await weatherAPI(zip);
+    let data = await weatherAPI.getWeatherData(zip);
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)
         .input('temperature',sql.VarChar(10),data.temperature)
@@ -70,7 +70,7 @@ exports.setTempDb = async function setTempDb(zip){
 exports.updateWeather = async function updateWeather(zip){
     let out = checkZipExists(zip);
     if(out){
-        let data = await weatherAPI(zip);
+        let data = await weatherAPI.getWeatherData(zip);
         let pool = await new sql.ConnectionPool(config).connect()
         let result = await new sql.Request(pool)
             .input('temperature',sql.VarChar(10),data.temperature)
@@ -93,6 +93,12 @@ exports.updateWeather = async function updateWeather(zip){
                     WHERE zipcode = @zipcode
             `)
     }
+}
+
+exports.getForecast = async function getForecast(zip){
+    console.log("entered climateDB");
+    let out = await weatherAPI.get5dayForecast(zip);
+    return out;
 }
 
 

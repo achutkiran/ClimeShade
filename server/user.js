@@ -23,7 +23,7 @@ exports.loginUser = async function loginUser(args){
         let out = await validatePassword(args.password,result.recordset[0].password)
         if(out){
             const token = await createToken(result.recordset[0],'10m');
-            return token;
+            return [token,result.recordset[0].userId];
         }
         else{
            throw new Error('Wrong Password');
@@ -44,16 +44,23 @@ exports.getUserDb = async function getUserDb(args,token){
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)
         .input('userId',sql.Int,args.id)
-        .input('firstName',sql.VarChar(30),args.firstName)
-        .input('lastName',sql.VarChar(30),args.lastName)
+        // .input('firstName',sql.VarChar(30),args.firstName)
+        // .input('lastName',sql.VarChar(30),args.lastName)
+        // .query(`
+        //     SELECT * FROM userdetails WHERE 
+        //     userId = CASE WHEN @userId is null THEN userId ELSE @userId END AND
+        //     firstName = CASE WHEN @firstName is null THEN firstName ELSE @firstName END AND
+        //     lastName = CASE WHEN @lastName is null THEN lastName ELSE @lastName END
+        //     `)
         .query(`
-            SELECT * FROM userdetails WHERE 
-            userId = CASE WHEN @userId is null THEN userId ELSE @userId END AND
-            firstName = CASE WHEN @firstName is null THEN firstName ELSE @firstName END AND
-            lastName = CASE WHEN @lastName is null THEN lastName ELSE @lastName END
-            `)
+            SELECT * FROM userdetails WHERE
+            userId = @userId`)
     if(result.recordset.length!=0){
-        return(result.recordset)
+        // console.log(result);
+        return(result.recordset[0])
+    }
+    else{
+        console.log("error");
     }
 }
 

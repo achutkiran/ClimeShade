@@ -11,6 +11,10 @@ const resolvers = {
         async user(parent, args,context){
             let out = await userDb.getUserDb(args,context.token)
             return out
+        },
+        async forecast(parent,args){
+            let out = await climateDb.getForecast(args.zipcode)
+            return out
         }
     },
 

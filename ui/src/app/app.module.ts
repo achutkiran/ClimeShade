@@ -31,6 +31,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { WeatherDetailsComponent } from './weather-details/weather-details.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { WeatherGraphComponent } from './weather-graph/weather-graph.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,11 @@ import { RegisterComponent } from './register/register.component';
     IndexComponent,
     WeatherDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent,
+    SidebarComponent,
+    WeatherGraphComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,8 @@ import { RegisterComponent } from './register/register.component';
     MatTooltipModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
