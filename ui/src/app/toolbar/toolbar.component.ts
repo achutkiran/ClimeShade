@@ -12,11 +12,12 @@ export class ToolbarComponent implements OnInit {
   constructor(public router:Router) { }
   @Input()
   title:string;
-  show:boolean =true;
+  @Input()
+  show:boolean;
+  @Input()
+  showLogin:boolean;
   ngOnInit() {
-    if(this.title=="Weather Details"){
-      this.show=false;
-    }
+    console.log(`title:${this.title}\nshow:${this.show}\nshowLogin:${this.showLogin}`);
   }
   searchWeather(zipcode:number){
     if(zipcode){
@@ -26,6 +27,25 @@ export class ToolbarComponent implements OnInit {
       alert("Enter zipcode");
     }
     console.log(this.title);
+  }
+  loggedIn():boolean{
+    return localStorage.getItem("token") != null;
+  }
+  login(){
+    console.log("login");
+    this.router.navigate([`/login`]);
+  }
+  logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    console.log("logout");
+    this.router.navigate([`/login`]);
+  }
+  settings(){
+    this.router.navigate(['/sidebar/settings']);
+  }
+  dashboard(){
+    this.router.navigate([`/sidebar`]);
   }
 
 }

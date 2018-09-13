@@ -1,3 +1,4 @@
+<app-toolbar [title]=title [show]=show [showLogin]=showLogin></app-toolbar>
 <ng-container
   *ngIf="loading; then notLoaded; else loaded">
 </ng-container>
@@ -6,6 +7,6 @@
 </ng-template>
 <ng-template #loaded>
     <app-weather-details [zipcode]=zip></app-weather-details>
-    <app-weather-graph></app-weather-graph>
+    <app-weather-graph [zipcode]=zip></app-weather-graph>
 </ng-template>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
@@ -9,6 +9,8 @@ import gql from 'graphql-tag';
   styleUrls: ['./weather-graph.component.css']
 })
 export class WeatherGraphComponent implements OnInit {
+  @Input()
+  zipcode:number;
   multi :any[]
   constructor(private apollo:Apollo) { }
 
@@ -16,7 +18,7 @@ export class WeatherGraphComponent implements OnInit {
     this.apollo.watchQuery({
       query:gql`
         {
-          forecast(zipcode:75080){
+          forecast(zipcode:${this.zipcode}){
             name
             series{
               name

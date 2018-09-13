@@ -22,6 +22,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -36,6 +38,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { WeatherGraphComponent } from './weather-graph/weather-graph.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SearchComponent } from './search/search.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { SearchComponent } from './search/search.component';
     DashboardComponent,
     SidebarComponent,
     WeatherGraphComponent,
-    SearchComponent
+    SearchComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import { SearchComponent } from './search/search.component';
     AppRoutingModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

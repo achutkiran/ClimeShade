@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TokenServiceService } from '../token-service.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,17 +9,17 @@ import gql from 'graphql-tag';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  token;
+  userId;
   firstName:string;
-  title:string="Dashboard";
-  constructor(private tokenService:TokenServiceService,private apollo:Apollo) { }
+  constructor(private apollo:Apollo,private router: Router) { }
 
   ngOnInit() {
-    this.token = this.tokenService.getToken();
+    this.userId = localStorage.getItem("userId");
+    console.log(`token is ${this.userId}`);
     this.apollo.watchQuery({
       query:gql`
       {
-        user(id:${this.token['userId']}){
+        user(id:${this.userId}){
           firstName
         }
       }
@@ -28,6 +27,9 @@ export class SidebarComponent implements OnInit {
     .subscribe(result => {
       // console.log(result);
      this.firstName  = result.data["user"]["firstName"];
+    },(error)=>{
+      console.log(error.message.slice(14));
+      this.router.navigate(['/login']);
     })
     // console.log(this.token);
   }

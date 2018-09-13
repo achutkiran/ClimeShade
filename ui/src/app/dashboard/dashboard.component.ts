@@ -13,11 +13,14 @@ export class DashboardComponent implements OnInit {
   userId:string;
   zip;
   loading=true;
-  constructor(private tokenService:TokenServiceService,private apollo:Apollo) {
+  title:string="Dashboard";
+  show=true;
+  showLogin=true;
+  constructor(private apollo:Apollo) {
    }
 
   ngOnInit() {
-    this.userId = this.tokenService.getToken()['userId'];
+    this.userId = localStorage.getItem("userId");
     console.log(this.userId);
     this.apollo.watchQuery({
       query:gql`
@@ -36,6 +39,5 @@ export class DashboardComponent implements OnInit {
     })
   }
     
-  }
 
 }

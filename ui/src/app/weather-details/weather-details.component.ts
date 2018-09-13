@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -29,6 +29,8 @@ export class WeatherDetailsComponent implements OnInit {
     console.log(this.zipcode);
     this.getWeatherData();
   }
+
+ 
 
   getWeatherData(): void{
     this.apollo.watchQuery({

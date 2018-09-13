@@ -36,10 +36,10 @@ exports.loginUser = async function loginUser(args){
 exports.getUserDb = async function getUserDb(args,token){
     let out = await checkToken(token)
     if(!out){
-        return "Please login again";
+        throw new Error('please login again');
     }
     if(! await checkUserDetails(args,out)){
-        return "you don't have permision"
+        throw new Error("no permission");
     }
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)

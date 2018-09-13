@@ -6,10 +6,9 @@
         <hr>
         <p>Navigation</p>
         <p><a routerLink="dashboard"><b>Dashboard</b></a></p>
-        <p><a><b>Settings</b></a></p>
+        <p><a routerLink="settings"><b>Settings</b></a></p>
     </mat-sidenav>
     <mat-sidenav-content class="toolbar">
-        <app-toolbar [title]=title></app-toolbar>
-        <router-outlet name="sidebar"></router-outlet>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

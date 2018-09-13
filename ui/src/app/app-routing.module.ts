@@ -6,22 +6,28 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
+import { RegisterComponent } from './register/register.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes =[
   {path: '', component:IndexComponent},
   {path:'index',component:IndexComponent},
   {path:'login',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
   {path:'zipcode/:zip',runGuardsAndResolvers:'always',component:SearchComponent},
   {path:'sidebar',component:SidebarComponent,
     children: [
-      {path:'',component: DashboardComponent,outlet:"sidebar"}
+      {path:'',redirectTo:"dashboard",pathMatch:"full"},
+      {path:'dashboard',component: DashboardComponent},
+      {path:'settings',component:SettingsComponent}
     ]
   },
+  {path:"settings",component:SettingsComponent}
   
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'})],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation:"reload"})],
   exports: [ RouterModule ]
 })
 

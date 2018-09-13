@@ -64,6 +64,7 @@ const {gql} = require('apollo-server-express');
 		firstName: String
 		lastName: String
 		userId: ID!
+		userName:String
 		climate: Climate
 	}
 

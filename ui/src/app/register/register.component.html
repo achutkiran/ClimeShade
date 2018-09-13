@@ -1,48 +1,58 @@
-<h3 class="top">
-  General Information
-</h3>
-<mat-card class="center generalCard">
-  <mat-card-content>
-    <form class="general">
-      <mat-form-field class="full-width centre">
-        <input #firstName matInput placeholder="First Name">
-      </mat-form-field><br>
-      <mat-form-field class="full-width centre">
-        <input #lastName matInput placeholder="Last Name">
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-</mat-card>
+<app-toolbar [title]=title></app-toolbar>
+<div class="flex-container">
+  <h3 class="generalHeader">
+    General Information
+  </h3>
+  <mat-card >
+    <mat-card-content>
+      <form [formGroup]="generalForm">
+        <mat-form-field>
+          <input #firstName matInput placeholder="First Name" formControlName="firstName">
+          <mat-error *ngIf="generalForm.hasError('required','firstName')">first name Required</mat-error>
+        </mat-form-field><br>
+         <mat-form-field>
+          <input #lastName matInput placeholder="Last Name" formControlName="lastName">
+          <mat-error *ngIf="generalForm.hasError('required','lastName')">last name Required</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-<!-- <h3 class="locHeader">
+
+  <h3 class="locationHeader">
     Location
-</h3> -->
-<!-- <mat-card class="center locCard">
-  <mat-card-content>
-    <form class="Location">
-      <mat-form-field class="full-width centre">
-        <input #location matInput placeholder="zipcode" type="number">
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-</mat-card> -->
+  </h3>
+  <mat-card >
+    <mat-card-content>
+      <form >
+        <mat-form-field>
+          <input #location matInput placeholder="zipcode" type="number" [formControl]="zipFormControl">
+          <mat-error *ngIf="zipFormControl.hasError('required')">Home zipcode Required</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-<!-- <h3 class="accHeader">
-  Account Details
-</h3> -->
-<!-- <mat-card class="center accCard">
-  <mat-card-content>
-    <form class="account">
-      <mat-form-field class="full-width centre">
-        <input #username matInput placeholder="username">
-      </mat-form-field><br>
-      <mat-form-field class="full-width centre">
-        <input #password matInput placeholder="password" type="password">
-      </mat-form-field><br>
-      <mat-form-field class="full-width centre">
-        <input #Rpassword matInput placeholder="Repeat Password" type="password">
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-</mat-card>
-<button mat-raised-button color="primary" class="registerButton">Register</button> -->
+  <h3 class="accountHeader">
+    Account Details
+  </h3>
+  <mat-card >
+    <mat-card-content>
+      <form [formGroup]="myForm">
+        <mat-form-field >
+          <input #username matInput placeholder="username" formControlName="userName">
+          <mat-error *ngIf="myForm.hasError('required','userName')">User name Required</mat-error>
+        </mat-form-field><br>
+        <mat-form-field >
+          <input #password matInput placeholder="password" type="password" formControlName="password">
+          <mat-error *ngIf ="myForm.hasError('required','password')">Password required</mat-error>
+        </mat-form-field><br>
+        <mat-form-field>
+          <input #Rpassword matInput placeholder="Repeat Password" type="password" formControlName="repPassword" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="myForm.hasError('notSame')">Passwords do not match</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <button mat-raised-button color="primary" class="registerButton" [disabled]="!myForm.valid || !generalForm.valid || !zipFormControl.valid" (click)="register(firstName.value,lastName.value,location.value,username.value,password.value)">Register</button>
+</div>

@@ -8,9 +8,7 @@ export class TokenServiceService {
   constructor() { }
   setToken(token:string,userId:string){
     localStorage.setItem("token",token);
-    this.token['userId'] = userId;
+    localStorage.setItem("userId",userId);
   }
-  getToken(){
-    return this.token;
-  }
+  
 }

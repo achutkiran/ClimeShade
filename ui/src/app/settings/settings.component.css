@@ -1,0 +1,13 @@
+.flexbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.eightyperwidth{
+    width:80%;
+}
+.icon{
+    margin-left:90%;
+}

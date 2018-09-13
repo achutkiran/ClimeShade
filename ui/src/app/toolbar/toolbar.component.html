@@ -3,6 +3,7 @@
     <div class="location">
           {{title}}
     </div>
+    <div class="space"></div>
     <div *ngIf="show">
       <mat-form-field >
         <input type="number" matInput placeholder="Zipcode" [(ngModel)]="zipcode">
@@ -10,6 +11,34 @@
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
+    </div>
+    <div *ngIf="showLogin">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container 
+          *ngIf ="loggedIn(); then logIn; else loggedOut">
+        </ng-container>
+        <ng-template #logIn>
+          <button mat-menu-item (click)="dashboard()">
+            Dashboard
+          </button>
+          <button mat-menu-item (click)="settings()"> 
+            settings
+          </button>
+          <button mat-menu-item (click)="logout()">
+            logout
+          </button>
+        </ng-template>
+        <ng-template #loggedOut>
+          <button mat-menu-item (click)="login()">
+            login
+          </button>
+        </ng-template>
+        
+      </mat-menu>
+      
     </div>
     
   </mat-toolbar-row>

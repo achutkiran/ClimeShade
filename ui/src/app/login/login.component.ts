@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  title:string="Login";
+  showSearch:boolean=true;
   requiredFormControl = new FormControl('',[Validators.required]);
   constructor(private apollo: Apollo,public snackBar: MatSnackBar,public tokenservice:TokenServiceService,private router:Router) { }
 

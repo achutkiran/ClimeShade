@@ -1,48 +1,21 @@
-.center{
-    position:relative;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-.mat-card{
-    width:376px;
-}
-.top{
-    /* top: 2%; */
-    left: 37%;
-    position: relative;
-    margin:15px;
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.generalCard{
-    top: 19%
+.registerButton{
+    margin-left: 142px;
 }
 
-.locHeader{
-    position: relative;
-    top: 30%;
-    left:37%;
+.generalHeader{
+    margin-right: 60px;
 }
 
-.locCard{
-    top: 43%;
+.locationHeader{
+    margin-right: 158px;
 }
 
-.accHeader {
-    position: relative;
-    left: 37%;
-    top: 50%;
-}
-
-.accCard {
-    top:70%;
-}
-
-.registerButton {
-    position: relative;
-    bottom: 10%;
-    left: 58%;
-}
-
-.full-width {
-    width:100%;
+.accountHeader{
+    margin-right: 103px;
 }

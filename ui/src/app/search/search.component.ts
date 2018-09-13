@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 export class SearchComponent implements OnInit {
   zip:string;
   title:string = "Weather Details";
+  showLogin:boolean =true;
   constructor(private router:Router,private route:ActivatedRoute,private location:Location) { }
 
   ngOnInit() {
@@ -20,7 +21,7 @@ export class SearchComponent implements OnInit {
   }
 
   updateWeather(){
-     this.router.navigate([`/zipcode/${this.zip}`])
+    this.router.navigate([`/zipcode/${this.zip}`])
   }
 
 }

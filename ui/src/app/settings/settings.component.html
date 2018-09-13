@@ -1,0 +1,89 @@
+<app-toolbar [title]=title [show]=show [showLogin]=show></app-toolbar>
+<div *ngIf="loading; else loaded">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
+  <ng-template #loaded>
+  <mat-accordion class="flexbox">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle class="eightyperwidth">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Information
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon class="icon">account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="First Name"  [formControl]="firstNameControl">
+        <mat-error  *ngIf="firstNameControl.hasError('required')">First name required</mat-error>
+        <button matSuffix mat-icon-button (click)="enableFirstName()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-form-field><br>
+      <mat-form-field>
+        <input matInput placeholder="LastName" [formControl]="lastNameControl">
+        <mat-error  *ngIf="lastNameControl.hasError('required')">Last name required</mat-error>
+        <button matSuffix mat-icon-button (click)="enableLastName()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle class="eightyperwidth">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Location Information
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon class="icon">edit_location</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="Zipcode" type="number" [formControl]="zipControl">
+        <mat-error  *ngIf="zipControl.hasError('required')">Zipcode required</mat-error>
+        <button matSuffix mat-icon-button (click)="enableZipcode()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle class="eightyperwidth">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Login Information
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon class="icon">vpn_key</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="user name" [(ngModel)]="userName" disabled>
+      </mat-form-field><br>
+      <form [formGroup]="passwordForm">
+        <mat-form-field>
+          <input matInput placeholder="Password" type="password" formControlName="password">
+          <mat-error *ngIf="passwordForm.hasError('required','password')">Password Required</mat-error>
+          <button matSuffix mat-icon-button (click)="enablePassword()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-form-field><br>
+        <div *ngIf="!passwordDisabled">
+          <mat-form-field>
+            <input matInput placeholder="Repeat Password" type="password" formControlName="rPassword" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="passwordForm.hasError('notsame')">Passwords do not match</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="submit()" [disabled]="buttonDisable()">Submit</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
