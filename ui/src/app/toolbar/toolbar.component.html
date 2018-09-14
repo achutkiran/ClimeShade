@@ -5,12 +5,9 @@
     </div>
     <div class="space"></div>
     <div *ngIf="show">
-      <mat-form-field >
-        <input type="number" matInput placeholder="Zipcode" [(ngModel)]="zipcode">
-        <button matSuffix mat-icon-button (click)="searchWeather(zipcode)">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
+      <button mat-icon-button (click)="searchWeather(zipcode)">
+        <mat-icon>search</mat-icon>
+      </button>
     </div>
     <div *ngIf="showLogin">
       <button mat-icon-button [matMenuTriggerFor]="menu">

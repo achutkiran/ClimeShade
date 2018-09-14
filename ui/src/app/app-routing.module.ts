@@ -14,7 +14,10 @@ const routes: Routes =[
   {path:'index',component:IndexComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'zipcode/:zip',runGuardsAndResolvers:'always',component:SearchComponent},
+  {path:'zipcode',component:SearchComponent,
+    children:[
+      {path:'zip/:id',component:WeatherDetailsComponent},
+    ]},
   {path:'sidebar',component:SidebarComponent,
     children: [
       {path:'',redirectTo:"dashboard",pathMatch:"full"},
@@ -27,7 +30,7 @@ const routes: Routes =[
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation:"reload"})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [ RouterModule ]
 })
 

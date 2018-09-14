@@ -20,11 +20,8 @@ exports.getTempDb = async function getTempDb(zip){
         return(result.recordset[0])
     }
     else{
-        //To do
-        return({
-            zipcode:00000,
-            temperature:'not',
-        })
+        throw new Error('Enter valid zipcode');
+        
     }
 }
 

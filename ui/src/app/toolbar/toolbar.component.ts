@@ -19,14 +19,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     console.log(`title:${this.title}\nshow:${this.show}\nshowLogin:${this.showLogin}`);
   }
-  searchWeather(zipcode:number){
-    if(zipcode){
-      this.router.navigate([`/zipcode/${zipcode}`],)
-    }
-    else{
-      alert("Enter zipcode");
-    }
-    console.log(this.title);
+  searchWeather(){
+    this.router.navigate([`/zipcode`],)
   }
   loggedIn():boolean{
     return localStorage.getItem("token") != null;

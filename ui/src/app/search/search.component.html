@@ -6,15 +6,17 @@
       <mat-icon>search</mat-icon>
     </button>
     <mat-form-field>
-      <input matInput placeholder="zipcode" [(ngModel)]="zip">
+      <input matInput placeholder="zipcode" type="number" [(ngModel)]="zip" autofocus="autofocus">
+      <!-- <mat-error *ngIf="zipFormControl.hasError('error')">Enter Valid zipcode</mat-error> -->
       <button mat-button *ngIf="zip" matSuffix mat-icon-button aria-label ="Clear" (click)="zip=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+    <div *ngIf="error" class="mat-error ">Enter Valid zipcode</div>
   </mat-card-content>
 </mat-card>
-<div class="text"><b>Result</b></div>
-<div class="detailsCard">
-    <app-weather-details [zipcode]=zip></app-weather-details>
+<div class="text" *ngIf="showWeather"><b>Result</b></div>
+<div class="detailsCard" *ngIf="showWeather">
+    <app-weather-details [zipcode]=zipcode (onError)="setError($event)"></app-weather-details>
 </div>
 

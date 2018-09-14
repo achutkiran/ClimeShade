@@ -27,36 +27,28 @@
           <img *ngSwitchCase="'50d'" src="../../assets/mist.svg" matTooltip={{weatherCondition}}>
       </div>
       <b>{{temperature}}</b>
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="zipcode">
-          <th mat-header-cell *matHeaderCellDef>Zipcode</th>
-          <td mat-cell *matCellDef='let element'>{{element.zipcode}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="city">
-          <th mat-header-cell *matHeaderCellDef class="dummy">City</th>
-          <td mat-cell *matCellDef='let element'>{{element.city}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="pressure">
-          <th mat-header-cell *matHeaderCellDef>Pressure</th>
-          <td mat-cell *matCellDef='let element'>{{element.pressure}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="humidity">
-            <th mat-header-cell *matHeaderCellDef>Humidity</th>
-            <td mat-cell *matCellDef='let element'>{{element.humidity}}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="windSpeed">
-          <th mat-header-cell *matHeaderCellDef>Windspeed</th>
-          <td mat-cell *matCellDef='let element'>{{element.windSpeed}}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      <div class="flexbox">
+        <div class="zipcode">
+          <p class="title">Zipcode</p>
+          <p>{{zip}}</p>
+        </div>
+        <div class="city">
+          <p class="title">City</p>
+          <p>{{city}}</p>
+        </div>
+        <div class="pressure">
+          <p class="title">Pressure</p>
+          <p>{{pressure}}</p>
+        </div>
+        <div class="humidity">
+          <p class="title">Humidity</p>
+          <p>{{humidity}}</p>
+        </div>
+        <div class="windSpeed">
+          <P class="title">Wind Speed</P>
+          <p>{{windSpeed}}</p>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
 </ng-template>
