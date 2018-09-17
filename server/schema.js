@@ -10,6 +10,8 @@ const {gql} = require('apollo-server-express');
 			 lastName:String): User 
 
 		forecast(zipcode: Int!):[ForecastWeather]
+
+		getUserWeather(zipcode:Int!): ReportedWeatherCondition
 	}
 
 	type Mutation{
@@ -72,6 +74,11 @@ const {gql} = require('apollo-server-express');
 	type ForecastWeather{
 		name:String
 		value: Int
+	}
+
+	type ReportedWeatherCondition{
+		weatherCondition:String
+		numReportedUsers:Int
 	}
  `;
  module.exports = schema;

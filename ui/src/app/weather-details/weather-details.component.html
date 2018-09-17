@@ -28,7 +28,8 @@
               <img *ngSwitchCase="'13d'" src="../../assets/snow.svg" matTooltip={{weatherCondition}}>
               <img *ngSwitchCase="'50d'" src="../../assets/mist.svg" matTooltip={{weatherCondition}}>
           </div>
-          <b>{{temperature}}</b>
+          <b>{{temperature}}</b><br>
+          <span *ngIf="reportedWeatherCondition!=null" class="reportedText">{{numReportedUsers}} users reported weather as <strong>{{reportedWeatherCondition}}</strong></span>
         </div>
         <div *ngIf="loggedIn()">
           <button mat-button color="primary" (click)="openDialog()">

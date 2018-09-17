@@ -190,6 +190,19 @@ exports.setUserWeather = async  function setUserWeather(args,token){
 
 }
 
+exports.getUserWeather = async function getUserWeather(userId,zipcode){
+    let pool = await new sql.ConnectionPool(config).connect();
+    let result = await new sql.Request(pool)
+        .input('userId',sql.Int,userId)
+        .input('zipcode',sql.Int,zipcode)
+        .query(`SELECT weatherCondition
+                FROM userClimate WHERE
+                userId = CASE WHEN @userId is null THEN userId ELSE @userId END AND
+                zipcode = @zipcode
+        `)
+    return getFrequentWeather(result.recordset);
+}
+
 async function updateUserWeather(args,out){
     let pool = await new sql.ConnectionPool(config).connect();
     let result = await new sql.Request(pool)
@@ -201,6 +214,7 @@ async function updateUserWeather(args,out){
                 WHERE userId = @userId AND zipcode = @zipcode
         `)
 }
+
 
 async function deleteUserWeather(userId){
     let pool = await new sql.ConnectionPool(config).connect();
@@ -245,19 +259,32 @@ async function checkUserDetails(args,out){
 }
 
 async function checkUserWeather(userId,zipcode){
-    let pool = await new sql.ConnectionPool(config).connect();
-    let result = await new sql.Request(pool)
-        .input('userId',sql.Int,userId)
-        .input('zipcode',sql.Int,zipcode)
-        .query(`SELECT *
-                FROM userClimate WHERE
-                userId = @userId AND
-                zipcode = @zipcode
-        `)
-    if(result.recordset.length!=0){
-        return true;
-    }
-    else{
+    result = await exports.getUserWeather(userId,zipcode);
+    if(result["weatherCondition"] == null){
         return false;
     }
+    else{
+        return true;
+    }
+}
+function getFrequentWeather(result){
+    tempJson = {};
+    for(let i=0;i<result.length;i++){
+        let wCondition = result[i]['weatherCondition'];
+        if(tempJson[wCondition]==null){
+            tempJson[wCondition] = 1;
+        }
+        else{
+            tempJson[wCondition] += 1;
+        }
+    }
+    outJson ={"weatherCondition":null,"numReportedUsers":0};
+    for(let key in tempJson){
+        if(outJson["numReportedUsers"] < tempJson[key]){
+            outJson["weatherCondition"] = key;
+            outJson["numReportedUsers"] = tempJson[key];
+        }
+    }
+    console.log(outJson);
+    return outJson;
 }

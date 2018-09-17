@@ -45,6 +45,10 @@ img {
     justify-content: space-between;
 }
 .temperature{
-    flex-basis: 170px;
+    flex-basis: 500px;
+}
+.reportedText{
+    display: block;
+    margin-block-end: 1em;
 }
 

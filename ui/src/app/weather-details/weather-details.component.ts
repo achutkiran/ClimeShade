@@ -22,6 +22,8 @@ export class WeatherDetailsComponent implements OnInit {
   humidity:string;
   windSpeed:string;
   city:string;
+  reportedWeatherCondition:String;
+  numReportedUsers:number;
   constructor(private apollo: Apollo,private route: Router,private dialog:MatDialog,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
@@ -37,11 +39,32 @@ export class WeatherDetailsComponent implements OnInit {
   @Input()
     set zipcode(zip:number){
       this.loading = true;
+      this.getUserWeather(zip);
       this.getWeatherData(zip);
     }
     @Output() onError: EventEmitter<boolean> = new EventEmitter<boolean>();
  
 
+  getUserWeather(zipcode:number):void{
+    this.apollo.watchQuery({
+      query: gql`
+      {
+        getUserWeather(zipcode:${zipcode}){
+          weatherCondition
+          numReportedUsers
+        }
+      }
+      `
+    })
+    .valueChanges
+    .subscribe(result =>{
+      console.log(result);
+      this.reportedWeatherCondition = result.data['getUserWeather']['weatherCondition'];
+      this.numReportedUsers = result.data['getUserWeather']['numReportedUsers'];
+      console.log("reportedWeatherCondition: "+ this.reportedWeatherCondition+"\nnumReportedUsers: "+this.numReportedUsers);
+    })
+  }
+    
   getWeatherData(zipcode:number): void{
     this.apollo.watchQuery({
       query: gql`

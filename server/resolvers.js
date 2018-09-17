@@ -15,6 +15,10 @@ const resolvers = {
         async forecast(parent,args){
             let out = await climateDb.getForecast(args.zipcode)
             return out
+        },
+        async getUserWeather(parent,args){
+            let out = await userDb.getUserWeather(null,args.zipcode)
+            return out
         }
     },
 
