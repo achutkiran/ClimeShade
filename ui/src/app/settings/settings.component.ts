@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, Ng
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,7 @@ export class SettingsComponent implements OnInit {
   lastNameControl:FormControl = new FormControl({value:'',disabled:true},[Validators.required]);
   zipControl:FormControl = new FormControl({value:'',disabled:true},[Validators.required]);
   
-  constructor(private fb:FormBuilder,private apollo:Apollo,private snackbar: MatSnackBar) { }
+  constructor(private fb:FormBuilder,private apollo:Apollo,private snackbar: MatSnackBar,private router:Router) { }
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
@@ -86,7 +87,7 @@ export class SettingsComponent implements OnInit {
         this.zipControl.setValue(result.data['user']['climate']['zipcode']);
         this.userName = result.data['user']['userName']; 
         this.loading = false;
-        console.log(result);
+        // console.log(result);
     })
   }
   buttonDisable():boolean{
@@ -94,7 +95,7 @@ export class SettingsComponent implements OnInit {
     let lNameForm:boolean = (this.lastNameControl.dirty && this.lastNameControl.valid);
     let zipForm:boolean = (this.zipControl.dirty && this.zipControl.valid);
     let passForm:boolean = (this.passwordForm.dirty && this.passwordForm.valid);
-    console.log(`formDirty:${fNameForm}\n lNameForm:${lNameForm}\n zipForm:${zipForm}\n passForm:${passForm}`)
+    // console.log(`formDirty:${fNameForm}\n lNameForm:${lNameForm}\n zipForm:${zipForm}\n passForm:${passForm}`)
     return !(fNameForm || lNameForm || zipForm || passForm);
   }
   submit(){
@@ -103,7 +104,7 @@ export class SettingsComponent implements OnInit {
         userId:${this.userId}
       `;
       if(this.firstNameControl.dirty){
-        console.log("entered firstName")
+        // console.log("entered firstName")
         query += `firstName: "${this.firstNameControl.value}" `;
       }
       if(this.lastNameControl.dirty){
@@ -120,6 +121,9 @@ export class SettingsComponent implements OnInit {
         mutation:gql(query)
       }).subscribe(({data})=>{
         this.snackbar.open(data.updateUser,"close");
+      },(error)=>{
+        this.snackbar.open("please login again","close");
+        this.router.navigate(['login']);
       })   
   }
 }

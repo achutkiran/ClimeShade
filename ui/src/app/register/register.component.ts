@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open(data.createUser,"close");
       this.router.navigate(['/login']);
     },(error)=>{
-      console.log(error);
+      // console.log(error);
     }
     );
   }

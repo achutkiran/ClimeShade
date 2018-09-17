@@ -24,6 +24,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 
 
@@ -39,6 +42,7 @@ import { WeatherGraphComponent } from './weather-graph/weather-graph.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TempSelectDialogComponent } from './temp-select-dialog/temp-select-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,8 @@ import { SettingsComponent } from './settings/settings.component';
     SidebarComponent,
     WeatherGraphComponent,
     SearchComponent,
-    SettingsComponent
+    SettingsComponent,
+    TempSelectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,8 +79,11 @@ import { SettingsComponent } from './settings/settings.component';
     MatSnackBarModule,
     NgxChartsModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatButtonToggleModule
   ],
+  entryComponents:[TempSelectDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

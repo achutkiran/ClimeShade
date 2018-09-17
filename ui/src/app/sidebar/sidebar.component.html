@@ -5,8 +5,8 @@
         <p>{{firstName}}</p>
         <hr>
         <p>Navigation</p>
-        <p><a routerLink="dashboard"><b>Dashboard</b></a></p>
-        <p><a routerLink="settings"><b>Settings</b></a></p>
+        <mat-nav-list><a mat-list-item routerLink="dashboard"><b>Dashboard</b></a></mat-nav-list>
+        <mat-nav-list><a mat-list-item routerLink="settings"><b>Settings</b></a></mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="toolbar">
         <router-outlet></router-outlet>

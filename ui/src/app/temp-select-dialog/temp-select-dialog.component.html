@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Select desired climate condition</h2>
+<mat-dialog-content>
+  <mat-button-toggle-group [(ngModel)] = "selectedImage">
+    <mat-button-toggle value='snow'>
+      <img src="../../assets/snow.svg" matTooltip="snow">
+    </mat-button-toggle>
+    <mat-button-toggle value='broken clouds' matTooltip="broken clouds">
+      <img src="../../assets/broken_clouds.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='few clouds' matTooltip="few clouds">
+      <img src="../../assets/few_clouds.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='mist' matTooltip="mist">
+      <img src="../../assets/mist.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='rain' matTooltip="rain">
+      <img src="../../assets/rain.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='scattered clouds' matTooltip="scatterd clouds">
+      <img src="../../assets/scattered_clouds.svg">
+    </mat-button-toggle > 
+    <mat-button-toggle value='drizzle rain' matTooltip="drizzle rain">
+      <img src="../../assets/shower_rain.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='clear sky' matTooltip="clear sky">
+      <img src="../../assets/sun.svg">
+    </mat-button-toggle>
+    <mat-button-toggle value='Thunderstrom' matTooltip="Thunderstrom">
+      <img src="../../assets/Thunderstrom.svg">
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Close</button> 
+  <button mat-raised-button color="primary" (click)="save()">Report</button>
+</mat-dialog-actions>

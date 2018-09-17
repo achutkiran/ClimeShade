@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
   @Input()
   showLogin:boolean;
   ngOnInit() {
-    console.log(`title:${this.title}\nshow:${this.show}\nshowLogin:${this.showLogin}`);
+    // console.log(`title:${this.title}\nshow:${this.show}\nshowLogin:${this.showLogin}`);
   }
   searchWeather(){
     this.router.navigate([`/zipcode`],)
@@ -26,13 +26,13 @@ export class ToolbarComponent implements OnInit {
     return localStorage.getItem("token") != null;
   }
   login(){
-    console.log("login");
+    // console.log("login");
     this.router.navigate([`/login`]);
   }
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    console.log("logout");
+    // console.log("logout");
     this.router.navigate([`/login`]);
   }
   settings(){

@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { TempSelectDialogComponent } from '../temp-select-dialog/temp-select-dialog.component';
+
 
 
 @Component({
@@ -19,7 +22,7 @@ export class WeatherDetailsComponent implements OnInit {
   humidity:string;
   windSpeed:string;
   city:string;
-  constructor(private apollo: Apollo,private route: ActivatedRoute) { }
+  constructor(private apollo: Apollo,private route: Router,private dialog:MatDialog,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
     // if(this.zipcode== null){
@@ -58,7 +61,7 @@ export class WeatherDetailsComponent implements OnInit {
     })
     .valueChanges
     .subscribe(result => { 
-      console.log(result);
+      // console.log(result);
       this.zip =result.data['weather']['zipcode'];
       this.temperature = result.data['weather']['temperature'];
       this.pressure = result.data['weather']['pressure'];
@@ -73,5 +76,37 @@ export class WeatherDetailsComponent implements OnInit {
     },(error) =>{
         this.onError.emit(true);
     });
+  }
+
+  openDialog(){
+    const dialogConfig =new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    this.dialog.open(TempSelectDialogComponent, dialogConfig)
+        .afterClosed().subscribe(
+          data => {
+            console.log(data);
+            if(data){
+              this.pushWeatherData(data);
+            }
+          }
+        )
+  }
+  pushWeatherData(data){
+    let query = `
+    mutation{
+      updateUserWeather(zipcode:${this.zip}
+      weatherCondition:"${data}")
+    }`;
+    this.apollo.mutate({
+      mutation: gql(query)
+    }).subscribe( ({data}) =>{
+        this.snackbar.open(data.updateUserWeather,"close");
+    },(error)=>{
+      this.snackbar.open("Please Login again","close");
+      this.route.navigate(['login']);
+    })
+  }
+  loggedIn():boolean{
+    return localStorage.getItem('userId')!=null?true:false;
   }
 }

@@ -27,42 +27,64 @@ exports.get5dayForecast = async function get5dayForecast(zip){
         let response = await axios.get(url);
         let data= response.data["list"];
         let temp = [];
+        // for(let i=0;i<data.length;i++){
+        //     let temperature = data[i]['main']['temp'];
+        //     let date = data[i]["dt_txt"];
+        //     let year = date.slice(0,10);
+        //     let out = temp.filter(x => (x.name == year));
+        //     date = date.slice(11,13);
+        //     switch(date){
+        //         case "21": date = "9 PM";
+        //                 break;
+        //         case "00": date = "12 AM";
+        //                 break;
+        //         case "03": date = "3 AM";
+        //                 break;
+        //         case "06": date = "6 AM";
+        //                 break;
+        //         case "09": date = "9 AM";
+        //                 break;
+        //         case "12": date = "12 PM";
+        //                 break;
+        //         case "15": date = "3 PM";
+        //                 break;
+        //         case "18": date = "6 PM";
+        //                 break;
+                
+        //     }
+        //     let datejson = {"name":date,"value":Math.round(temperature)};
+        //     if(out.length!=0){
+        //         out[0]["series"].push(datejson);
+        //     }
+        //     else{
+        //         let yearjson = {"name":year,"series":[datejson]};
+        //         temp.push(yearjson);
+        //     }
+        // }
+
         for(let i=0;i<data.length;i++){
             let temperature = data[i]['main']['temp'];
             let date = data[i]["dt_txt"];
             let year = date.slice(0,10);
-            let out = temp.filter(x => (x.name == year));
-            date = date.slice(11,13);
-            switch(date){
-                case "21": date = "9 PM";
-                        break;
-                case "00": date = "12 AM";
-                        break;
-                case "03": date = "3 AM";
-                        break;
-                case "06": date = "6 AM";
-                        break;
-                case "09": date = "9 AM";
-                        break;
-                case "12": date = "12 PM";
-                        break;
-                case "15": date = "3 PM";
-                        break;
-                case "18": date = "6 PM";
-                        break;
-                
-            }
-            let datejson = {"name":date,"value":Math.round(temperature)};
+            let out = temp.filter(x => x.name==year);
             if(out.length!=0){
-                out[0]["series"].push(datejson);
+                out[0]['count'] += 1;
+                out[0]['temp'] += temperature;
             }
             else{
-                let yearjson = {"name":year,"series":[datejson]};
-                temp.push(yearjson);
+                let json = {"name":year,"count":1,'temp':temperature}
+                temp.push(json);
             }
         }
-        console.log(temp[0]);
-        return temp;
+        data = [];
+        for(let i=0;i<temp.length;i++){
+            let json ={};
+            json["name"] = temp[i]['name'];
+            json["value"]=Math.round(temp[i]['temp']/temp[i]['count']);
+            data.push(json);
+        }
+        console.log(data[0]);
+        return data;
     }
     catch(error){
         console.log(error);

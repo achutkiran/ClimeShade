@@ -41,6 +41,7 @@ const {gql} = require('apollo-server-express');
 			
 		"Update weather information in database"
 		updateWeather(zipcode:Int!): String
+
 	}
 
 	type Subscription {
@@ -69,10 +70,6 @@ const {gql} = require('apollo-server-express');
 	}
 
 	type ForecastWeather{
-		name:String
-		series: [Series]
-	}
-	type Series{
 		name:String
 		value: Int
 	}

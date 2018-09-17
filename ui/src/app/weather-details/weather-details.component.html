@@ -11,42 +11,51 @@
     </mat-card-header>
     <mat-card-content class="content">
       <!-- <i class="material-icons">cloud</i> -->
-      <div [ngSwitch]="icon">
-          <img *ngSwitchCase="'01d'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'01n'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'02d'" src="../../assets/few_clouds.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'02n'" src="../../assets/few_clouds.svg"matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'03d'" src="../../assets/scattered_clouds.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'03n'" src="../../assets/scattered_clouds.svg"matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'04d'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'04n'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'09d'" src="../../assets/shower_rain.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'10d'" src="../../assets/rain.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'11d'" src="../../assets/Thunderstrom.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'13d'" src="../../assets/snow.svg" matTooltip={{weatherCondition}}>
-          <img *ngSwitchCase="'50d'" src="../../assets/mist.svg" matTooltip={{weatherCondition}}>
+      <div class="flexbox1">
+        <div class="temperature">
+          <div [ngSwitch]="icon">
+              <img *ngSwitchCase="'01d'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'01n'" src="../../assets/sun.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'02d'" src="../../assets/few_clouds.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'02n'" src="../../assets/few_clouds.svg"matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'03d'" src="../../assets/scattered_clouds.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'03n'" src="../../assets/scattered_clouds.svg"matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'04d'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'04n'" src="../../assets/broken_clouds.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'09d'" src="../../assets/shower_rain.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'10d'" src="../../assets/rain.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'11d'" src="../../assets/Thunderstrom.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'13d'" src="../../assets/snow.svg" matTooltip={{weatherCondition}}>
+              <img *ngSwitchCase="'50d'" src="../../assets/mist.svg" matTooltip={{weatherCondition}}>
+          </div>
+          <b>{{temperature}}</b>
+        </div>
+        <div *ngIf="loggedIn()">
+          <button mat-button color="primary" (click)="openDialog()">
+            <mat-icon>info</mat-icon> Report
+          </button>
+        </div>
       </div>
-      <b>{{temperature}}</b>
       <div class="flexbox">
         <div class="zipcode">
-          <p class="title">Zipcode</p>
-          <p>{{zip}}</p>
+          <span class="title">Zipcode</span><br>
+          <span>{{zip}}</span>
         </div>
         <div class="city">
-          <p class="title">City</p>
-          <p>{{city}}</p>
+          <span class="title">City</span><br>
+          <span>{{city}}</span>
         </div>
         <div class="pressure">
-          <p class="title">Pressure</p>
-          <p>{{pressure}}</p>
+          <span class="title">Pressure</span><br>
+          <span>{{pressure}}</span>
         </div>
         <div class="humidity">
-          <p class="title">Humidity</p>
-          <p>{{humidity}}</p>
+          <span class="title">Humidity</span><br>
+          <span>{{humidity}}</span>
         </div>
         <div class="windSpeed">
-          <P class="title">Wind Speed</P>
-          <p>{{windSpeed}}</p>
+          <span class="title">Wind Speed</span><br>
+          <span>{{windSpeed}}</span>
         </div>
       </div>
     </mat-card-content>

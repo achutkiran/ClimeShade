@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
     this.showWeather= true;
   }
   public setError(error:boolean):void{
-    console.log(error);
+    // console.log(error);
     this.error = error;
   }
   // zipValidator(){

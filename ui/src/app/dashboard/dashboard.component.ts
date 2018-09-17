@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
-    console.log(this.userId);
+    // console.log(this.userId);
     this.apollo.watchQuery({
       query:gql`
       {

@@ -163,7 +163,7 @@ exports.updateUserDb = async function updateUserDb(args,token){
 exports.setUserWeather = async  function setUserWeather(args,token){
     let out = await checkToken(token);
     if(!out){
-        return "Please login";
+        throw new Error("Please Login again");
     }
     if(args.zipcode == null){
         args.zipcode = out.zipcode;
@@ -176,18 +176,15 @@ exports.setUserWeather = async  function setUserWeather(args,token){
     let result = await new sql.Request(pool)
         .input('userId',sql.Int,out.userId)
         .input('zipcode',sql.Int,args.zipcode)
-        .input('temperature',sql.VarChar(10),args.temperature)
-        .input('weatherCondition',sql.VarChar(10),args.weatherCondition)
+        .input('weatherCondition',sql.VarChar(15),args.weatherCondition)
         .query(`INSERT INTO userClimate (
                     userId,
                     zipcode,
-                    temperature,
                     weatherCondition
                 )
                 VALUES (
                     @userId,
                     @zipcode,
-                    @temperature,
                     @weatherCondition)`)
     return "Weather information uploaded";
 
@@ -198,10 +195,8 @@ async function updateUserWeather(args,out){
     let result = await new sql.Request(pool)
         .input('userId',sql.Int,out.userId)
         .input('zipcode',sql.Int,args.zipcode)
-        .input('temperature',sql.VarChar(10),args.temperature)
-        .input('weatherCondition',sql.VarChar(10),args.weatherCondition)
+        .input('weatherCondition',sql.VarChar(15),args.weatherCondition)
         .query(`UPDATE userClimate SET
-                temperature = CASE WHEN @temperature is null THEN temperature ELSE @temperature END,
                 weatherCondition = CASE WHEN @weatherCondition is null THEN weatherCondition ELSE @weatherCondition END
                 WHERE userId = @userId AND zipcode = @zipcode
         `)

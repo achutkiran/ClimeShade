@@ -28,9 +28,23 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .title{
     font-weight: bold;
+}
+
+.city, .pressure, .humidity, .zipcode{
+    margin-right: 4em;
+    margin-bottom: 1em;
+}
+.flexbox1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+.temperature{
+    flex-basis: 170px;
 }
 

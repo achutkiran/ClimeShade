@@ -11,7 +11,8 @@ import gql from 'graphql-tag';
 export class WeatherGraphComponent implements OnInit {
   @Input()
   zipcode:number;
-  multi :any[]
+  single :any[];
+  loading:boolean=true;
   constructor(private apollo:Apollo) { }
 
   ngOnInit() {
@@ -20,16 +21,15 @@ export class WeatherGraphComponent implements OnInit {
         {
           forecast(zipcode:${this.zipcode}){
             name
-            series{
-              name
-              value
-            }
+            value
           }
         }
       `
     }).valueChanges
     .subscribe(result =>{
-      this.multi = result.data['forecast'];
+      this.single = result.data['forecast'];
+      this.loading =false;
+      console.log(this.single);
     })
   }
 
@@ -41,7 +41,7 @@ export class WeatherGraphComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Date & Time';
+  xAxisLabel = 'Date';
   showYAxisLabel = true;
   yAxisLabel = 'Temperature in °F';
   timeline = true;
