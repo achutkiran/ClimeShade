@@ -38,6 +38,7 @@ export class WeatherDetailsComponent implements OnInit {
 
   @Input()
     set zipcode(zip:number){
+      console.log(zip);
       this.loading = true;
       this.getUserWeather(zip);
       this.getWeatherData(zip);

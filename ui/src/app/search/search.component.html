@@ -6,8 +6,7 @@
       <mat-icon>search</mat-icon>
     </button>
     <mat-form-field>
-      <input matInput placeholder="zipcode" type="number" [(ngModel)]="zip" autofocus>
-      <!-- <mat-error *ngIf="zipFormControl.hasError('error')">Enter Valid zipcode</mat-error> -->
+      <input matInput placeholder="zipcode" type="number" [(ngModel)]="zip" #zipcodeElement>
       <button mat-button *ngIf="zip" matSuffix mat-icon-button aria-label ="Clear" (click)="zip=''">
         <mat-icon>close</mat-icon>
       </button>

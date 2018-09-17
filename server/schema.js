@@ -38,7 +38,6 @@ const {gql} = require('apollo-server-express');
 
 		"update weather information by user"
 		updateUserWeather(zipcode:Int,
-							temperature: String,
 							weatherCondition: String):String
 			
 		"Update weather information in database"

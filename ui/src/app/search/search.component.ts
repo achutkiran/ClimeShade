@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { ErrorStateMatcher } from '@angular/material';
@@ -16,11 +16,13 @@ export class SearchComponent implements OnInit {
   showLogin:boolean =true;
   showWeather:boolean = false;
   error:boolean = false;
+  @ViewChild('zipcodeElement') zipcodeElement:ElementRef;
   // matcher = new MyErrorStateMatcher();
   // zipFormControl:FormControl = new FormControl('',[Validators.required,this.zipValidator]) ;
   constructor(private router:Router,private route:ActivatedRoute,private location:Location) { }
 
   ngOnInit() {
+    this.zipcodeElement.nativeElement.focus();
     
   }
 
