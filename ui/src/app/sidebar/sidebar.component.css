@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .title{
     font-family: 'Fredericka the Great', cursive;
     color:white;
@@ -18,6 +19,7 @@
 }
 p{
     padding-left: 15px;
+    font-family: 'Roboto', sans-serif;
 }
 a{
     text-decoration: none;
