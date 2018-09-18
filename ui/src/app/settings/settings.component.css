@@ -12,3 +12,7 @@
 .icon{
     margin-left:90%;
 }
+.error{
+    color:red;
+    font-size: 75%
+}

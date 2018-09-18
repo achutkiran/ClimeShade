@@ -44,14 +44,6 @@ exports.getUserDb = async function getUserDb(args,token){
     let pool = await new sql.ConnectionPool(config).connect()
     let result = await new sql.Request(pool)
         .input('userId',sql.Int,args.id)
-        // .input('firstName',sql.VarChar(30),args.firstName)
-        // .input('lastName',sql.VarChar(30),args.lastName)
-        // .query(`
-        //     SELECT * FROM userdetails WHERE 
-        //     userId = CASE WHEN @userId is null THEN userId ELSE @userId END AND
-        //     firstName = CASE WHEN @firstName is null THEN firstName ELSE @firstName END AND
-        //     lastName = CASE WHEN @lastName is null THEN lastName ELSE @lastName END
-        //     `)
         .query(`
             SELECT * FROM userdetails WHERE
             userId = @userId`)
@@ -71,35 +63,40 @@ exports.setUserDb = async function setUserDb(args){
         await climateDb.updateWeather(args.zipcode);
     }
     let pass = await hashPassword(args.password);
-    let pool = await new sql.ConnectionPool(config).connect()
-    let result = await new sql.Request(pool)
-        .input('firstName',sql.VarChar(30),args.firstName)
-        .input('lastName',sql.VarChar(30),args.lastName)
-        .input('zipcode',sql.Int,args.zipcode)
-        .input('userName',sql.VarChar(9),args.userName)
-        .input('password',sql.VarChar(60),pass)
-        .query(`
-            INSERT INTO userdetails (
-                firstName,
-                lastName,
-                zipcode,
-                userName,
-                password
-            ) 
-            OUTPUT Inserted.userId as id
-            VALUES(
-                @firstName,
-                @lastName,
-                @zipcode,
-                @userName,
-                @password
-            )
-        `)
-        args['userId'] = result.recordset[0].id;
-        delete args['userName']
-        delete args['password']
-        return args;
-        
+    try{
+        let pool = await new sql.ConnectionPool(config).connect()
+        let result = await new sql.Request(pool)
+            .input('firstName',sql.VarChar(30),args.firstName)
+            .input('lastName',sql.VarChar(30),args.lastName)
+            .input('zipcode',sql.Int,args.zipcode)
+            .input('userName',sql.VarChar(9),args.userName)
+            .input('password',sql.VarChar(60),pass)
+            .query(`
+                INSERT INTO userdetails (
+                    firstName,
+                    lastName,
+                    zipcode,
+                    userName,
+                    password
+                ) 
+                OUTPUT Inserted.userId as id
+                VALUES(
+                    @firstName,
+                    @lastName,
+                    @zipcode,
+                    @userName,
+                    @password
+                )
+            `)
+            args['userId'] = result.recordset[0].id;
+            delete args['userName']
+            delete args['password']
+            return args;
+    } catch(err){
+        if(err.originalError.info["message"].includes("UNIQUE KEY")){
+            throw new Error("UserName already exists");
+        }
+    }        
 }
 
 //removing user from the database
@@ -285,6 +282,5 @@ function getFrequentWeather(result){
             outJson["numReportedUsers"] = tempJson[key];
         }
     }
-    console.log(outJson);
     return outJson;
 }

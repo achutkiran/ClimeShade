@@ -14,7 +14,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   title:string="Login";
   showSearch:boolean=true;
-  requiredFormControl = new FormControl('',[Validators.required]);
+  passwordError:boolean=false;
+  uNameFormControl = new FormControl('',[Validators.required]);
+  passwordFormControl = new FormControl('',[Validators.required]);
   constructor(private apollo: Apollo,public snackBar: MatSnackBar,public tokenservice:TokenServiceService,private router:Router) { }
 
   ngOnInit() {
@@ -33,7 +35,14 @@ export class LoginComponent implements OnInit {
         this.tokenservice.setToken(data.login[0],data.login[1]);
         this.router.navigateByUrl('/sidebar');
       },(error) => {
-        this.snackBar.open(error.message.slice(14,),"close");
+        console.log(error);
+        error = error.message.slice(14,);
+        if(error.includes("Wrong Password")){
+          this.passwordError= true;
+        }
+        else{
+          this.snackBar.open("Server is down","close");
+        }
       });
     }
   }

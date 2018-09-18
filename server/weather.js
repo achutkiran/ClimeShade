@@ -2,7 +2,6 @@ const axios = require('axios');
 var apikey = process.env.APIKEY;
 exports.getWeatherData = async function getWeatherData(zip){
     try{
-        console.log("Entere WEatherAPI");
         let url = `http://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=Imperial&appid=${apikey}`;
         let response = await axios.get(url)
         let data = response.data;
@@ -17,12 +16,11 @@ exports.getWeatherData = async function getWeatherData(zip){
             icon: data.weather[0].icon
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 exports.get5dayForecast = async function get5dayForecast(zip){
     try{
-        console.log("entered Weatther API")
         let url = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=Imperial&appid=${apikey}`;
         let response = await axios.get(url);
         let data= response.data["list"];
@@ -48,13 +46,12 @@ exports.get5dayForecast = async function get5dayForecast(zip){
             json["value"]=Math.round(temp[i]['temp']/temp[i]['count']);
             data.push(json);
         }
-        console.log(data[0]);
         out = [{"name":"Weather Forecast",
                 "series":data}]
         return out;
     }
     catch(error){
-        console.log(error);
+        // console.log(error);
     }
 }
 

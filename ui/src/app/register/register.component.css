@@ -19,3 +19,8 @@
 .accountHeader{
     margin-right: 103px;
 }
+
+.error{
+    color: red;
+    font-size: 75%
+}

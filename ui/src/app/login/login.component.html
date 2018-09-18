@@ -6,14 +6,15 @@
   <mat-card-content>
     <form class="user-form" >
       <mat-form-field class="ninety-width">
-        <input #name matInput placeholder="UserName" [formControl]="requiredFormControl">
-        <mat-error *ngIf="requiredFormControl.hasError('required')">UserName is required</mat-error>
+        <input #name matInput placeholder="UserName" [formControl]="uNameFormControl">
+        <mat-error *ngIf="uNameFormControl.hasError('required')">UserName is required</mat-error>
       </mat-form-field>
       <br>
       <mat-form-field class="ninety-width">
-        <input #password matInput type="password" placeholder="Password" [formControl]="requiredFormControl">
-        <mat-error *ngIf="requiredFormControl.hasError('required')">Password is required</mat-error>
+        <input #password matInput type="password" placeholder="Password" [formControl]="passwordFormControl">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">Password is required</mat-error>
       </mat-form-field>
+      <div *ngIf="passwordError" class="error">Wrong Password</div>
     </form>
   </mat-card-content>
   <mat-card-actions>

@@ -20,6 +20,7 @@ export class SettingsComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   show:boolean = true;
   title:string="Settings";
+  zipError:boolean=false;
   firstNameControl:FormControl = new FormControl({value:'',disabled:true},[Validators.required]);
   lastNameControl:FormControl = new FormControl({value:'',disabled:true},[Validators.required]);
   zipControl:FormControl = new FormControl({value:'',disabled:true},[Validators.required]);
@@ -119,8 +120,15 @@ export class SettingsComponent implements OnInit {
       }).subscribe(({data})=>{
         this.snackbar.open(data.updateUser,"close");
       },(error)=>{
-        this.snackbar.open("please login again","close");
-        this.router.navigate(['login']);
+        error = error.message.slice(14,);
+        if(error.includes("valid zipcode")){
+          this.setStep(1);
+          this.zipError = true;
+        }
+        else{
+          this.snackbar.open("please login again","close");
+          this.router.navigate(['login']);
+        }
       })   
   }
 }

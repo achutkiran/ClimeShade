@@ -26,7 +26,7 @@ const resolvers = {
         async createUser(parent,args){
             let out = await userDb.setUserDb(args);
             pubsub.publish("User Created",{userCreated: out});
-            return "welcome "+args.firstName+" "+args.lastName+" to climeShade with id: "+out.userId;
+            return "Welcome "+args.firstName+" "+args.lastName+" to climeShade";
         },
         async updateUser(parent,args,context){
             let out = await userDb.updateUserDb(args,context.token);

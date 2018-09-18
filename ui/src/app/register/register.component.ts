@@ -15,6 +15,9 @@ export class RegisterComponent implements OnInit {
   myForm: FormGroup;
   generalForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  userNameError:boolean = false;
+  zipError:boolean =false;
+  showLogin:boolean=true;
   zipFormControl:FormControl = new FormControl('',[Validators.required]);
   constructor(private fb: FormBuilder,private apollo: Apollo,private snackBar:MatSnackBar,private router:Router) { }
 
@@ -52,7 +55,16 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open(data.createUser,"close");
       this.router.navigate(['/login']);
     },(error)=>{
-      console.log(error);
+      error = error.message.slice(14,);
+      if(error.includes("already exists")){
+        this.userNameError = true;
+      }
+      else if(error.includes("valid zipcode")){
+        this.zipError = true;
+      }
+      else{
+        this.snackBar.open("Server is down","close");
+      }
     }
     );
   }
