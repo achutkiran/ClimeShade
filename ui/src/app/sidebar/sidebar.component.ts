@@ -42,6 +42,6 @@ export class SidebarComponent implements OnInit {
       this.sidenavIcon=true;
     }
   }
-
-
+  
+  
 }

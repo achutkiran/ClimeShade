@@ -24,8 +24,7 @@ const routes: Routes =[
       {path:'dashboard',component: DashboardComponent},
       {path:'settings',component:SettingsComponent}
     ]
-  },
-  {path:"settings",component:SettingsComponent}
+  }
   
 ];
 
