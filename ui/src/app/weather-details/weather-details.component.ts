@@ -111,9 +111,9 @@ export class WeatherDetailsComponent implements OnInit {
     this.apollo.mutate({
       mutation: gql(query)
     }).subscribe( ({data}) =>{
-        this.snackbar.open(data.updateUserWeather,"close");
+        this.snackbar.open(data.updateUserWeather,"close",{duration:3000});
     },(error)=>{
-      this.snackbar.open("Please Login again","close");
+      this.snackbar.open("Please Login again","close",{duration:3000});
       this.route.navigate(['login']);
     })
   }

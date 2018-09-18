@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           this.passwordError= true;
         }
         else{
-          this.snackBar.open("Server is down","close");
+          this.snackBar.open("Server is down","close",{duration:3000});
         }
       });
     }

@@ -10,7 +10,6 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  zip:string;
   zipcode;
   title:string = "Weather Details";
   showLogin:boolean =true;
@@ -25,7 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   updateWeather(){
-    this.zipcode =this.zip;
+    this.zipcode =this.zipcodeElement.nativeElement.value;
     this.showWeather= true;
   }
   public setError(error:boolean):void{

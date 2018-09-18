@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
         }
       `, fetchPolicy:"no-cache"
     }).subscribe(({data})=>{
-      this.snackBar.open(data.createUser,"close");
+      this.snackBar.open(data.createUser,"close",{duration:3000});
       this.router.navigate(['/login']);
     },(error)=>{
       error = error.message.slice(14,);
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         this.zipError = true;
       }
       else{
-        this.snackBar.open("Server is down","close");
+        this.snackBar.open("Server is down","close",{duration:3000});
       }
     }
     );

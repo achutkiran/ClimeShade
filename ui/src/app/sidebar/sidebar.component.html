@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav">
-    <mat-sidenav #drawer mode="side" opened class="mat-elevation-z2">
+    <mat-sidenav #drawer mode={{mode}} opened={{open}} class="mat-elevation-z2">
         <mat-nav-list class="title mat-elevation-z2">ClimeShade</mat-nav-list>
         <mat-icon class="account">account_circle</mat-icon>
         <p>{{firstName}}</p>
@@ -7,6 +7,7 @@
         <p>Navigation</p>
         <mat-nav-list><a mat-list-item routerLink="dashboard"><b>Dashboard</b></a></mat-nav-list>
         <mat-nav-list><a mat-list-item routerLink="settings"><b>Settings</b></a></mat-nav-list>
+        
     </mat-sidenav>
     <mat-sidenav-content class="toolbar">
         <router-outlet></router-outlet>

@@ -118,7 +118,7 @@ export class SettingsComponent implements OnInit {
       this.apollo.mutate({
         mutation:gql(query)
       }).subscribe(({data})=>{
-        this.snackbar.open(data.updateUser,"close");
+        this.snackbar.open(data.updateUser,"close",{duration:3000});
       },(error)=>{
         error = error.message.slice(14,);
         if(error.includes("valid zipcode")){
@@ -126,7 +126,7 @@ export class SettingsComponent implements OnInit {
           this.zipError = true;
         }
         else{
-          this.snackbar.open("please login again","close");
+          this.snackbar.open("please login again","close",{duration:3000});
           this.router.navigate(['login']);
         }
       })   

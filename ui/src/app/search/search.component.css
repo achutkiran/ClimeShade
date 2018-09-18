@@ -5,7 +5,9 @@
     margin-right: 5%;
     font-family: 'Roboto',sans-serif;
 }
-.mat-error{
-   margin-left: 4%;
-   font-size: 75%; 
+
+.error{
+    color: red;
+    font-size: 75%;
+    margin-left:3.7em;
 }

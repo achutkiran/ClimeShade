@@ -8,11 +8,11 @@
       <form [formGroup]="generalForm">
         <mat-form-field>
           <input #firstName matInput placeholder="First Name" formControlName="firstName">
-          <mat-error *ngIf="generalForm.hasError('required','firstName')">first name Required</mat-error>
+          <mat-error *ngIf="generalForm.hasError('required','firstName')">First name Required</mat-error>
         </mat-form-field><br>
          <mat-form-field>
           <input #lastName matInput placeholder="Last Name" formControlName="lastName">
-          <mat-error *ngIf="generalForm.hasError('required','lastName')">last name Required</mat-error>
+          <mat-error *ngIf="generalForm.hasError('required','lastName')">Last name Required</mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -27,7 +27,7 @@
       <form >
         <mat-form-field>
           <input #location matInput placeholder="zipcode" type="number" [formControl]="zipFormControl">
-          <mat-error *ngIf="zipFormControl.hasError('required')">Home zipcode Required</mat-error>
+          <mat-error *ngIf="zipFormControl.hasError('required')">Zipcode Required</mat-error>
         </mat-form-field>
         <div *ngIf="zipError" class="error">Please enter valid zipcode</div>
       </form>
@@ -48,7 +48,7 @@
         <br>
         <mat-form-field >
           <input #password matInput placeholder="password" type="password" formControlName="password">
-          <mat-error *ngIf ="myForm.hasError('required','password')">Password required</mat-error>
+          <mat-error *ngIf ="myForm.hasError('required','password')">Password Required</mat-error>
         </mat-form-field><br>
         <mat-form-field>
           <input #Rpassword matInput placeholder="Repeat Password" type="password" formControlName="repPassword" [errorStateMatcher]="matcher">
