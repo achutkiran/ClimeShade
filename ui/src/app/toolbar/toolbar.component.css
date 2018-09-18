@@ -2,18 +2,11 @@
     display: flex;
     flex: 1 1 auto;
 }
-/* .sidenav a {
-    width:100%;
-} */
 
 .root-toolbar {
     margin: 0px;
 }
 
-/* .main-row {
-    display: flex;
-    justify-content: space-between;
-} */
 
 .location {
     display: inline-block;

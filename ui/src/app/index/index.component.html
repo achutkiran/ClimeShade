@@ -1,2 +1,13 @@
-<h1>Welcome to ClimeShade</h1>
+<app-toolbar [title]="title" [show]="show" [showLogin]="showLogin"></app-toolbar>
+
+<mat-card class="card">
+    <mat-card-content>
+        <mat-card-title class="title">ClimeShade</mat-card-title>
+        <p>
+            ClimeShade is one of the first weather reporting service. In this website, users can report their local weather.
+            Get started by logging in/ registering.
+        </p>
+        <a routerLink="/login"><button mat-raised-button color="primary" class="loginButton" >Login</button></a>
+    </mat-card-content>
+</mat-card>
 

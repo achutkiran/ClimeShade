@@ -15,7 +15,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
-    // console.log(`token is ${this.userId}`);
     this.apollo.watchQuery({
       query:gql`
       {
@@ -25,13 +24,10 @@ export class SidebarComponent implements OnInit {
       }
     `}).valueChanges
     .subscribe(result => {
-      // console.log(result);
      this.firstName  = result.data["user"]["firstName"];
     },(error)=>{
-      // console.log(error.message.slice(14));
       this.router.navigate(['/login']);
     })
-    // console.log(this.token);
   }
 
 

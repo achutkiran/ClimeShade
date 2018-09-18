@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit {
         `,
         fetchPolicy: 'no-cache'
       }).subscribe(({data}) => {
-        // console.log(data);
         this.tokenservice.setToken(data.login[0],data.login[1]);
         this.router.navigateByUrl('/sidebar');
-        // console.log(data.login)
       },(error) => {
         this.snackBar.open(error.message.slice(14,),"close");
       });

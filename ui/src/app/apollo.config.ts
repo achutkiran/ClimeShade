@@ -24,7 +24,6 @@ export class GraphQLModule {
         return {};
       }
       else {
-        console.log(`header is ${token}`);
         return {
           headers: {token: `${token}`}
         };

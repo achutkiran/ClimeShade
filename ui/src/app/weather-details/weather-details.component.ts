@@ -27,18 +27,10 @@ export class WeatherDetailsComponent implements OnInit {
   constructor(private apollo: Apollo,private route: Router,private dialog:MatDialog,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    // if(this.zipcode== null){
-    //   this.route.params.subscribe((params: Params) => {
-    //     this.zipcode = params['id'];
-    //   })
-    // }
-    // console.log(this.zipcode);
-    // this.getWeatherData();
   }
 
   @Input()
     set zipcode(zip:number){
-      console.log(zip);
       this.loading = true;
       this.getUserWeather(zip);
       this.getWeatherData(zip);
@@ -59,10 +51,8 @@ export class WeatherDetailsComponent implements OnInit {
     })
     .valueChanges
     .subscribe(result =>{
-      console.log(result);
       this.reportedWeatherCondition = result.data['getUserWeather']['weatherCondition'];
       this.numReportedUsers = result.data['getUserWeather']['numReportedUsers'];
-      console.log("reportedWeatherCondition: "+ this.reportedWeatherCondition+"\nnumReportedUsers: "+this.numReportedUsers);
     })
   }
     
@@ -85,7 +75,6 @@ export class WeatherDetailsComponent implements OnInit {
     })
     .valueChanges
     .subscribe(result => { 
-      // console.log(result);
       this.zip =result.data['weather']['zipcode'];
       this.temperature = result.data['weather']['temperature'];
       this.pressure = result.data['weather']['pressure'];
@@ -94,7 +83,6 @@ export class WeatherDetailsComponent implements OnInit {
       this.city = result.data['weather']['city'];
       this.weatherCondition = result.data['weather']['weatherCondition'];
       this.icon = result.data['weather']['icon'];
-      // console.log(this.icon);
       this.loading = false;
       this.onError.emit(false);
     },(error) =>{
@@ -108,7 +96,6 @@ export class WeatherDetailsComponent implements OnInit {
     this.dialog.open(TempSelectDialogComponent, dialogConfig)
         .afterClosed().subscribe(
           data => {
-            console.log(data);
             if(data){
               this.pushWeatherData(data);
             }

@@ -87,7 +87,6 @@ export class SettingsComponent implements OnInit {
         this.zipControl.setValue(result.data['user']['climate']['zipcode']);
         this.userName = result.data['user']['userName']; 
         this.loading = false;
-        // console.log(result);
     })
   }
   buttonDisable():boolean{
@@ -95,7 +94,6 @@ export class SettingsComponent implements OnInit {
     let lNameForm:boolean = (this.lastNameControl.dirty && this.lastNameControl.valid);
     let zipForm:boolean = (this.zipControl.dirty && this.zipControl.valid);
     let passForm:boolean = (this.passwordForm.dirty && this.passwordForm.valid);
-    // console.log(`formDirty:${fNameForm}\n lNameForm:${lNameForm}\n zipForm:${zipForm}\n passForm:${passForm}`)
     return !(fNameForm || lNameForm || zipForm || passForm);
   }
   submit(){
@@ -104,7 +102,6 @@ export class SettingsComponent implements OnInit {
         userId:${this.userId}
       `;
       if(this.firstNameControl.dirty){
-        // console.log("entered firstName")
         query += `firstName: "${this.firstNameControl.value}" `;
       }
       if(this.lastNameControl.dirty){

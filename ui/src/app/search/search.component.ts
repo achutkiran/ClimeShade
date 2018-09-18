@@ -17,8 +17,6 @@ export class SearchComponent implements OnInit {
   showWeather:boolean = false;
   error:boolean = false;
   @ViewChild('zipcodeElement') zipcodeElement:ElementRef;
-  // matcher = new MyErrorStateMatcher();
-  // zipFormControl:FormControl = new FormControl('',[Validators.required,this.zipValidator]) ;
   constructor(private router:Router,private route:ActivatedRoute,private location:Location) { }
 
   ngOnInit() {
@@ -31,17 +29,7 @@ export class SearchComponent implements OnInit {
     this.showWeather= true;
   }
   public setError(error:boolean):void{
-    // console.log(error);
     this.error = error;
   }
-  // zipValidator(){
-  //   console.log("hi");
-  //   return this.error? {error:true}:null;
-  // }
 
 }
-// export class MyErrorStateMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     return !!(control && control.invalid && (control.dirty || control.touched));
-//   }
-// }

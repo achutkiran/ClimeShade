@@ -19,16 +19,6 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,private apollo: Apollo,private snackBar:MatSnackBar,private router:Router) { }
 
   ngOnInit() {
-    // if(window.navigator &&window.navigator.geolocation){
-    //   window.navigator.geolocation.getCurrentPosition(
-    //     position =>{
-    //       console.log(position);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   )
-    // }
     this.myForm = this.fb.group({
       userName: ['',Validators.required],
       password: ['',Validators.required],
@@ -62,7 +52,7 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open(data.createUser,"close");
       this.router.navigate(['/login']);
     },(error)=>{
-      // console.log(error);
+      console.log(error);
     }
     );
   }

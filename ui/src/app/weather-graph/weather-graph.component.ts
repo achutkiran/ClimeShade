@@ -21,7 +21,10 @@ export class WeatherGraphComponent implements OnInit {
         {
           forecast(zipcode:${this.zipcode}){
             name
-            value
+            series{
+              name
+              value
+            }
           }
         }
       `
@@ -29,22 +32,22 @@ export class WeatherGraphComponent implements OnInit {
     .subscribe(result =>{
       this.single = result.data['forecast'];
       this.loading =false;
-      console.log(this.single);
     })
   }
 
-  view: any[] = [1000, 400];
+ 
 
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
   xAxisLabel = 'Date';
   showYAxisLabel = true;
   yAxisLabel = 'Temperature in °F';
   timeline = true;
+  autoScale = true;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

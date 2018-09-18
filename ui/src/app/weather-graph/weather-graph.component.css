@@ -1,3 +1,10 @@
 .card{
     height:420px;
 }
+.flexbox{
+    display:flex;
+}
+
+.graph{
+    min-height: 400px;
+}

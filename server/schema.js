@@ -9,7 +9,7 @@ const {gql} = require('apollo-server-express');
 			 firstName: String
 			 lastName:String): User 
 
-		forecast(zipcode: Int!):[ForecastWeather]
+		forecast(zipcode: Int!):[fiveDaysForecast]
 
 		getUserWeather(zipcode:Int!): ReportedWeatherCondition
 	}
@@ -73,6 +73,11 @@ const {gql} = require('apollo-server-express');
 	type ForecastWeather{
 		name:String
 		value: Int
+	}
+
+	type fiveDaysForecast{
+		name:String
+		series:[ForecastWeather]
 	}
 
 	type ReportedWeatherCondition{

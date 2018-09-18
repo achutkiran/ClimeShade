@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
-    // console.log(this.userId);
     this.apollo.watchQuery({
       query:gql`
       {
@@ -35,7 +34,6 @@ export class DashboardComponent implements OnInit {
     .subscribe(result => {
      this.zip  = result.data["user"]['climate']["zipcode"];
      this.loading=false;
-    //  console.log(this.zip)
     })
   }
     
