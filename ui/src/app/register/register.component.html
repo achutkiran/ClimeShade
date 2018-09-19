@@ -8,11 +8,11 @@
       <form [formGroup]="generalForm">
         <mat-form-field>
           <input #firstName matInput placeholder="First Name" formControlName="firstName">
-          <mat-error *ngIf="generalForm.hasError('required','firstName')">First name Required</mat-error>
+          <mat-error *ngIf="generalForm.hasError('required',['firstName'])">First name Required</mat-error>
         </mat-form-field><br>
          <mat-form-field>
           <input #lastName matInput placeholder="Last Name" formControlName="lastName">
-          <mat-error *ngIf="generalForm.hasError('required','lastName')">Last name Required</mat-error>
+          <mat-error *ngIf="generalForm.hasError('required',['lastName'])">Last name Required</mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -42,13 +42,13 @@
       <form [formGroup]="myForm">
         <mat-form-field >
           <input #username matInput placeholder="username" formControlName="userName">
-          <mat-error *ngIf="myForm.hasError('required','userName')">User name Required</mat-error>
+          <mat-error *ngIf="myForm.hasError('required',['userName'])">User name Required</mat-error>
         </mat-form-field>
         <div *ngIf="userNameError" class="error">User name already exists</div>
         <br>
         <mat-form-field >
           <input #password matInput placeholder="password" type="password" formControlName="password">
-          <mat-error *ngIf ="myForm.hasError('required','password')">Password Required</mat-error>
+          <mat-error *ngIf ="myForm.hasError('required',['password'])">Password Required</mat-error>
         </mat-form-field><br>
         <mat-form-field>
           <input #Rpassword matInput placeholder="Repeat Password" type="password" formControlName="repPassword" [errorStateMatcher]="matcher">

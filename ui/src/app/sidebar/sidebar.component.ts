@@ -13,11 +13,10 @@ export class SidebarComponent implements OnInit {
   firstName:string;
   mode:String="side";
   open:boolean=true;
-  sidenavIcon:boolean=false;
   constructor(private apollo:Apollo,private router: Router) { }
 
   ngOnInit() {
-    //this.browserCheck();
+    // this.browserCheck();
     this.userId = localStorage.getItem("userId");
     this.apollo.watchQuery({
       query:gql`
@@ -30,6 +29,8 @@ export class SidebarComponent implements OnInit {
     .subscribe(result => {
      this.firstName  = result.data["user"]["firstName"];
     },(error)=>{
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
       this.router.navigate(['/login']);
     })
 
@@ -39,7 +40,6 @@ export class SidebarComponent implements OnInit {
     if(window.innerWidth<=768){
       this.mode="over";
       this.open=false;
-      this.sidenavIcon=true;
     }
   }
   

@@ -7,7 +7,7 @@
     </button>
     <mat-form-field>
       <input matInput placeholder="zipcode" type="number" #zipcodeElement (keyup.enter)="updateWeather()" >
-      <button mat-button *ngIf="zip" matSuffix mat-icon-button aria-label ="Clear" (click)="zip=''">
+      <button mat-button *ngIf="zipcodeElement.value" matSuffix mat-icon-button aria-label ="Clear" (click)="zipcodeElement.value=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

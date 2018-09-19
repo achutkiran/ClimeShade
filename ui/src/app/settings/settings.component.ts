@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { Apollo } from 'apollo-angular';
@@ -127,6 +127,8 @@ export class SettingsComponent implements OnInit {
         }
         else{
           this.snackbar.open("please login again","close",{duration:3000});
+          localStorage.removeItem('userId');
+          localStorage.removeItem('token');
           this.router.navigate(['login']);
         }
       })   

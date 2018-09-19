@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(private apollo: Apollo,public snackBar: MatSnackBar,public tokenservice:TokenServiceService,private router:Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token')!=null){
+      this.router.navigate(['/sidebar']);
+    }
   }
   login(name:string,password:string){
     if(name.length !=0 && password.length != 0){

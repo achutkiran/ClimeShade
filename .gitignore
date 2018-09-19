@@ -1,3 +1,4 @@
 .env
 dummy.js
 node_modules
+dist
