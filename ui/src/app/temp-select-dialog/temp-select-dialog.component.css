@@ -2,4 +2,11 @@ img{
     height:45px;
     
 }
+.flexbox{
+    display:flex;
+    flex-wrap: wrap;
+}
+mat-button-toggle:hover{
+    background-color: lightgray;
+}
 
