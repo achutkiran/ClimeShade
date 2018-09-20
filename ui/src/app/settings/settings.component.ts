@@ -88,6 +88,15 @@ export class SettingsComponent implements OnInit {
         this.zipControl.setValue(result.data['user']['climate']['zipcode']);
         this.userName = result.data['user']['userName']; 
         this.loading = false;
+    },(error)=>{
+      error = error.message.slice(14,);
+      if(error.includes("login again")){
+        this.snackbar.open("please login again","close",{duration:3000});
+        localStorage.removeItem('userId');
+        localStorage.removeItem('token');
+        this.router.navigate(['login']);
+      }
+
     })
   }
   buttonDisable():boolean{
