@@ -9,6 +9,7 @@
         <input #name matInput placeholder="UserName" [formControl]="uNameFormControl">
         <mat-error *ngIf="uNameFormControl.hasError('required')">UserName is required</mat-error>
       </mat-form-field>
+      <div *ngIf="userError" class="error">User not registered</div>
       <br>
       <mat-form-field class="ninety-width">
         <input #password matInput type="password" placeholder="Password" [formControl]="passwordFormControl">

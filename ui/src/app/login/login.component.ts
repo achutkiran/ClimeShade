@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   title:string="Login";
   showSearch:boolean=true;
   passwordError:boolean=false;
+  userError:boolean = false;
   uNameFormControl = new FormControl('',[Validators.required]);
   passwordFormControl = new FormControl('',[Validators.required]);
   constructor(private apollo: Apollo,public snackBar: MatSnackBar,public tokenservice:TokenServiceService,private router:Router) { }
@@ -38,10 +39,12 @@ export class LoginComponent implements OnInit {
         this.tokenservice.setToken(data.login[0],data.login[1]);
         this.router.navigateByUrl('/sidebar');
       },(error) => {
-        console.log(error);
         error = error.message.slice(14,);
         if(error.includes("Wrong Password")){
           this.passwordError= true;
+        }
+        else if(error.includes("user not")){
+          this.userError = true;
         }
         else{
           this.snackBar.open("Server is down","close",{duration:3000});
