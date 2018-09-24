@@ -1,6 +1,8 @@
 <mat-toolbar color="primary" class="root-toolbar mat-elevation-z2">
   <mat-toolbar-row class="main-row">
-    <!-- <mat-icon *ngIf="sidenavIcon">menu</mat-icon> -->
+    <button mat-icon-button *ngIf="showIcon" >
+      <mat-icon (click)="openSideNav()">menu</mat-icon>
+    </button>
     <div class="location">
           {{title}}
     </div>

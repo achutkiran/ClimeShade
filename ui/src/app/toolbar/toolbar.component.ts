@@ -1,5 +1,7 @@
 import { Component, OnInit, Query, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenServiceService } from '../token-service.service';
+import { SideNavService } from '../side-nav.service';
 
 
 
@@ -9,14 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-  constructor(public router:Router) { }
+  constructor(public router:Router, private service:SideNavService) { }
   @Input()
   title:string;
   @Input()
   show:boolean;
   @Input()
   showLogin:boolean;
+  showIcon:boolean;
   ngOnInit() {
+    let mobile = this.service.isItMobile();
+    if(mobile && (this.title == "Settings" || this.title == "Dashboard")){
+      this.showIcon = true;
+    }
+    else{
+      this.showIcon  = false;
+    }
   }
   searchWeather(){
     this.router.navigate([`/zipcode`],)
@@ -37,6 +47,9 @@ export class ToolbarComponent implements OnInit {
   }
   dashboard(){
     this.router.navigate([`/sidebar`]);
+  }
+  openSideNav(){
+    this.service.openSideNav();
   }
 
 }
