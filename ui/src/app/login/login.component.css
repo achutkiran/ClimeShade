@@ -1,37 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
 
-.card {
-    width: 397px;
-    height: 250px;
-    position: absolute;
-    top: 50%;
+
+.flexbox{
+    display: flex;
+    height: calc(100vh - 64px);
+    justify-content: center;
+    align-items: center;
 }
 
-.title {
+.card{
+    flex-basis: 397px;
+    max-width: 397px;
+}
+
+.header{
+    display:flex;
+    justify-content: center;
+}
+
+.title{
     font-family: 'Fredericka the Great', cursive;
     font-size: 48px;
-    position: absolute;
-    top: 50px;
 }
 
 .user-form{
-    position:absolute;
-    top: 100px;
-    width: 100%;
+    display:flex;
+    flex-direction: column;
 }
 
-.ninety-width, .login {
-    width: 90%
+.login-action{
+    display:flex;
 }
 
-.centre{
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.login {
-    position: absolute;
-    bottom: 0%;
+.login-button{
+    flex-basis: 100%;
 }
 
 .register {

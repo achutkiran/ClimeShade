@@ -1,25 +1,27 @@
 <app-toolbar [title]=title [show]=showSearch></app-toolbar>
-<mat-card class="card centre">
-  <mat-card-header>
-    <mat-card-title class="title centre">ClimeShade</mat-card-title>
+<div class="flexbox">
+<mat-card class="card">
+  <mat-card-header class="header">
+    <mat-card-title class="title">ClimeShade</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form class="user-form" >
-      <mat-form-field class="ninety-width">
+      <mat-form-field>
         <input #name matInput placeholder="UserName" [formControl]="uNameFormControl">
         <mat-error *ngIf="uNameFormControl.hasError('required')">UserName is required</mat-error>
       </mat-form-field>
       <div *ngIf="userError" class="error">User not registered</div>
       <br>
-      <mat-form-field class="ninety-width">
+      <mat-form-field >
         <input #password matInput type="password" placeholder="Password" [formControl]="passwordFormControl">
         <mat-error *ngIf="passwordFormControl.hasError('required')">Password is required</mat-error>
       </mat-form-field>
       <div *ngIf="passwordError" class="error">Wrong Password</div>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button class="login centre ninety-width" color="primary" (click)="login(name.value,password.value)">Login</button>
+  <mat-card-actions class="login-action">
+    <button mat-raised-button color="primary" (click)="login(name.value,password.value)" class="login-button">Login</button>
     <a class="register" routerLink="/register">Register new user</a>
   </mat-card-actions>
 </mat-card>
+</div>
