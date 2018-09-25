@@ -8,9 +8,11 @@ const {gql} = require('apollo-server-express');
 		user(id: ID
 			 firstName: String
 			 lastName:String): User 
-
+		
+		"5 days weather forecast"
 		forecast(zipcode: Int!):[fiveDaysForecast]
 
+		"gives user reported weather"
 		getUserWeather(zipcode:Int!): ReportedWeatherCondition
 	}
 
@@ -36,7 +38,7 @@ const {gql} = require('apollo-server-express');
 		login(userName:String!,
 			  password:String!):[String]
 
-		"update weather information by user"
+		"report weather by user"
 		updateUserWeather(zipcode:Int,
 							weatherCondition: String):String
 			
@@ -46,6 +48,7 @@ const {gql} = require('apollo-server-express');
 	}
 
 	type Subscription {
+		"subscribes if new user was created"
 		userCreated: User
 	}
 	
@@ -70,6 +73,7 @@ const {gql} = require('apollo-server-express');
 		climate: Climate
 	}
 
+	
 	type ForecastWeather{
 		name:String
 		value: Int
